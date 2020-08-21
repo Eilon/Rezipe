@@ -38,23 +38,5 @@
 
     protected override void OnInitialized()
     {
-        RegisterRoutes();
     }
-
-    void RegisterRoutes()
-    {
-        //routes.Add("monkeydetails", typeof(MonkeyDetailPage));
-        //routes.Add("beardetails", typeof(BearDetailPage));
-        //routes.Add("catdetails", typeof(CatDetailPage));
-        //routes.Add("dogdetails", typeof(DogDetailPage));
-        //routes.Add("elephantdetails", typeof(ElephantDetailPage));
-
-        foreach (var item in routes)
-        {
-            Routing.RegisterRoute(item.Key, item.Value);
-        }
-    }
-
-    Dictionary<string, Type> routes = new Dictionary<string, Type>();
-    public Dictionary<string, Type> Routes { get { return routes; } }
 }
