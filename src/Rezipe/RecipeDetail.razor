@@ -1,0 +1,38 @@
+﻿@page "/recipedetails/{id}"
+@inject RecipeStore Recipes
+
+<ContentView>
+    <ScrollView>
+        <StackLayout>
+            <Label Text="@Recipe.Title"></Label>
+
+            <Label Text="Ingredients"></Label>
+            @foreach (var ingredient in Recipe.Ingredients)
+            {
+                <Label Margin="new Thickness(left: 40, 0, 0, 0)"
+                       Text="@($"[ ] {ingredient.Quantity} {ingredient.Unit} {ingredient.Name}")">
+                </Label>
+            }
+
+            <Label Text="Steps"></Label>
+            @for (int i = 0; i < Recipe.Steps.Count; i++)
+            {
+                <Label Margin="new Thickness(left: 40, 0, 0, 0)"
+                       Text="@($"{i+1}. {Recipe.Steps[i]}")">
+                </Label>
+            }
+        </StackLayout>
+    </ScrollView>
+</ContentView>
+@code {
+    Recipe Recipe;
+
+    [Parameter]
+    public int id
+    {
+        set
+        {
+            Recipe = Recipes.GetRecipes().Single(r => r.ID == value);
+        }
+    }
+}

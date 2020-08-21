@@ -3,23 +3,28 @@ using Microsoft.MobileBlazorBindings;
 using Microsoft.Extensions.Hosting;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Rezipe
 {
     public class App : Application
     {
+        public IHost AppHost { get; }
+
         public App()
         {
-            var host = MobileBlazorBindingsHost.CreateDefaultBuilder()
+            AppHost = MobileBlazorBindingsHost.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
                     // Register app-specific services
                     //services.AddSingleton<AppState>();
+                    services.AddSingleton<ShellNavigationManager>();
+                    services.AddSingleton<RecipeStore>();
                 })
                 .Build();
 
             MainPage = new ContentPage();
-            host.AddComponent<HelloWorld>(parent: MainPage);
+            AppHost.AddComponent<RezipeApp>(parent: this);
         }
 
         protected override void OnStart()

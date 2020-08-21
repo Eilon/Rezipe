@@ -1,0 +1,27 @@
+﻿@page "/recipes/my"
+@inject ShellNavigationManager NavigationManager
+@inject RecipeStore Recipes
+
+<ContentPage>
+    <ScrollView>
+        <StackLayout Margin="new Thickness(20)">
+
+            <Label Text="My Recipes"
+                    FontSize="40" />
+
+            @foreach (var recipe in Recipes.GetRecipes())
+            {
+                <RecipeLink Recipe="recipe" OnClick="RecipeClicked" />
+            }
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
+
+
+@code {
+    async Task RecipeClicked(Recipe recipe)
+    {
+        await NavigationManager.NavigateToAsync($"/recipedetails/{recipe.ID}");
+    }
+}

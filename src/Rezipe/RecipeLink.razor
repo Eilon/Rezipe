@@ -1,0 +1,34 @@
+﻿<Grid Padding="new Thickness(10)" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, *">
+    <TapGestureRecognizer OnTapped="Details" />
+    <GridCell RowSpan="2">
+        @*<Image Source="new UriImageSource { Uri=new Uri(Animal.ImageUrl) }"
+            Aspect="Aspect.AspectFill"
+            HeightRequest="60"
+            WidthRequest="60" />*@
+    </GridCell>
+
+    <GridCell Column="1">
+        <Label Text="@Recipe.Title"
+               FontAttributes="FontAttributes.Bold" />
+    </GridCell>
+
+    <GridCell Row="1" Column="1">
+        <Label FontAttributes="FontAttributes.Italic"
+               VerticalOptions="LayoutOptions.End">
+            <Span>Servings: @Recipe.Servings; cook time: @Recipe.CookTime.Minutes min</Span>
+        </Label>
+    </GridCell>
+</Grid>
+
+@code
+{
+    [Parameter] public Recipe Recipe { get; set; }
+
+    [Parameter] public EventCallback<Recipe> OnClick { get; set; }
+
+    void Details()
+    {
+        if (OnClick.HasDelegate)
+            OnClick.InvokeAsync(Recipe);
+    }
+}

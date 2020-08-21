@@ -1,0 +1,60 @@
+﻿@inject RecipeStore Recipes
+
+
+<Shell OnNavigated="OnNavigated"
+       OnNavigating="OnNavigating"
+       FlyoutBackgroundImage="@(new FileImageSource { File = "photo.jpg" })"
+       FlyoutBackgroundImageAspect="Aspect.AspectFill"
+       FlyoutHeaderBehavior="FlyoutHeaderBehavior.CollapseOnScroll">
+
+    <ChildContent>
+        <FlyoutItem Route="recipes"
+                    Title="Recipes"
+                    FlyoutDisplayOptions="FlyoutDisplayOptions.AsMultipleItems">
+            <ShellContent Route="my"
+                            Title="My Recipes">
+                <RecipePage />
+            </ShellContent>
+
+        </FlyoutItem>
+
+        <ShellContent Route="about"
+                      Title="About">
+            <AboutPage />
+        </ShellContent>
+
+    </ChildContent>
+</Shell>
+
+@code
+{
+    void OnNavigated(ShellNavigatedEventArgs e)
+    {
+    }
+
+    void OnNavigating(ShellNavigatingEventArgs e)
+    {
+    }
+
+    protected override void OnInitialized()
+    {
+        RegisterRoutes();
+    }
+
+    void RegisterRoutes()
+    {
+        //routes.Add("monkeydetails", typeof(MonkeyDetailPage));
+        //routes.Add("beardetails", typeof(BearDetailPage));
+        //routes.Add("catdetails", typeof(CatDetailPage));
+        //routes.Add("dogdetails", typeof(DogDetailPage));
+        //routes.Add("elephantdetails", typeof(ElephantDetailPage));
+
+        foreach (var item in routes)
+        {
+            Routing.RegisterRoute(item.Key, item.Value);
+        }
+    }
+
+    Dictionary<string, Type> routes = new Dictionary<string, Type>();
+    public Dictionary<string, Type> Routes { get { return routes; } }
+}
