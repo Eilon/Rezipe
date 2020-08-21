@@ -5,12 +5,15 @@
     <ScrollView>
         <StackLayout>
             <Label Text="@Recipe.Title"></Label>
-
+            <StackLayout Orientation="StackOrientation.Horizontal">
+                <Label><Span>Servings: @Servings (orig: @Recipe.Servings)</Span></Label>
+                <Slider HorizontalOptions="LayoutOptions.FillAndExpand" Minimum="1" Maximum="16" @bind-Value="ServingsBind" />
+            </StackLayout>
             <Label Text="Ingredients"></Label>
             @foreach (var ingredient in Recipe.Ingredients)
             {
                 <Label Margin="new Thickness(left: 40, 0, 0, 0)"
-                       Text="@($"[ ] {ingredient.Quantity} {ingredient.Unit} {ingredient.Name}")">
+                       Text="@($"[ ] {ingredient.Quantity / Recipe.Servings * Servings} {ingredient.Unit} {ingredient.Name}")">
                 </Label>
             }
 
@@ -26,6 +29,37 @@
 </ContentView>
 @code {
     Recipe Recipe;
+
+    private int? _servings;
+
+    public double ServingsBind
+    {
+        get
+        {
+            return Servings;
+        }
+        set
+        {
+            Servings = Convert.ToInt32(Math.Round(value));
+        }
+    }
+
+    public int Servings
+    {
+        get
+        {
+            if (!_servings.HasValue)
+            {
+                _servings = Recipe.Servings;
+            }
+            return _servings.Value;
+        }
+        set
+        {
+            _servings = value;
+            StateHasChanged();
+        }
+    }
 
     [Parameter]
     public int id
