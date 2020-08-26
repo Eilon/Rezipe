@@ -15,7 +15,7 @@
     <GridCell Row="1" Column="1">
         <Label FontAttributes="FontAttributes.Italic"
                VerticalOptions="LayoutOptions.End">
-            <Span>Servings: @Recipe.Servings; cook time: @Recipe.CookTime.Minutes min</Span>
+            <Span>Servings: @Recipe.Servings; cook time: @GetCookTimeDisplay(Recipe.CookTime)</Span>
         </Label>
     </GridCell>
 </Grid>
@@ -30,5 +30,36 @@
     {
         if (OnClick.HasDelegate)
             OnClick.InvokeAsync(Recipe);
+    }
+
+    private static string GetCookTimeDisplay(TimeSpan cookTime)
+    {
+        var ret = new System.Text.StringBuilder();
+        if (cookTime.Days > 0)
+        {
+            ret.AppendFormat(CultureInfo.CurrentCulture, "{0}d", cookTime.Days);
+        }
+        if (cookTime.Hours > 0)
+        {
+            if (ret.Length > 0)
+            {
+                ret.Append(" ");
+            }
+            ret.AppendFormat(CultureInfo.CurrentCulture, "{0}h", cookTime.Hours);
+        }
+        if (cookTime.Minutes > 0)
+        {
+            if (ret.Length > 0)
+            {
+                ret.Append(" ");
+            }
+            ret.AppendFormat(CultureInfo.CurrentCulture, "{0}m", cookTime.Minutes);
+        }
+        // Ignore seconds. Recipes aren't specified in seconds.
+        if (ret.Length == 0)
+        {
+            return "unknown";
+        }
+        return ret.ToString();
     }
 }
