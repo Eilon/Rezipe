@@ -13,7 +13,7 @@
             @foreach (var ingredient in Recipe.Ingredients)
             {
                 <Label Margin="new Thickness(left: 40, 0, 0, 0)"
-                       Text="@($"[ ] {ingredient.Quantity / Recipe.Servings * Servings} {ingredient.Unit} {ingredient.Name}")">
+                       Text="@($"[ ] {FractionHelper.FormatFraction(GetScaledIngredient(ingredient.Quantity, Recipe.Servings, Servings))} {ingredient.Unit} {ingredient.Name}")">
                 </Label>
             }
 
@@ -68,5 +68,10 @@
         {
             Recipe = Recipes.GetRecipes().Single(r => r.ID == value);
         }
+    }
+
+    private decimal GetScaledIngredient(decimal value, int valueServings, int desiredServings)
+    {
+        return value * desiredServings / valueServings;
     }
 }
