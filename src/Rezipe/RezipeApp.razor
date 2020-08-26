@@ -1,5 +1,5 @@
 ﻿@inject RecipeStore Recipes
-
+@inject ShellNavigationManager NavigationManager
 
 <Shell OnNavigated="OnNavigated"
        OnNavigating="OnNavigating"
@@ -11,9 +11,10 @@
         <FlyoutItem Route="recipes"
                     Title="Recipes"
                     FlyoutDisplayOptions="FlyoutDisplayOptions.AsMultipleItems">
+
             <ShellContent Route="my"
-                            Title="My Recipes">
-                <RecipePage />
+                          Title="My Recipes">
+                <RecipePage @ref="recipePage" />
             </ShellContent>
 
         </FlyoutItem>
@@ -28,6 +29,8 @@
 
 @code
 {
+    RecipePage recipePage;
+
     void OnNavigated(ShellNavigatedEventArgs e)
     {
     }
@@ -36,7 +39,11 @@
     {
     }
 
-    protected override void OnInitialized()
+    protected override void OnAfterRender(bool firstRender)
     {
+        if (firstRender)
+        {
+            recipePage.GoToRecipePage();
+        }
     }
 }
