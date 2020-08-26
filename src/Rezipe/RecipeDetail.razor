@@ -7,7 +7,7 @@
             <Label Text="@Recipe.Title"></Label>
             <StackLayout Orientation="StackOrientation.Horizontal">
                 <Label><Span>Servings: @Servings (orig: @Recipe.Servings)</Span></Label>
-                <Slider HorizontalOptions="LayoutOptions.FillAndExpand" Minimum="1" Maximum="16" @bind-Value="ServingsBind" />
+                <Slider HorizontalOptions="LayoutOptions.FillAndExpand" Minimum="1" Maximum="@(Math.Max(Recipe.Servings * 4, 20))" @bind-Value="ServingsBind" />
             </StackLayout>
             <Label Text="Ingredients"></Label>
             @foreach (var ingredient in Recipe.Ingredients)
