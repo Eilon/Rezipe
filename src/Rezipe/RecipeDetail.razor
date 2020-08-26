@@ -10,11 +10,17 @@
                 <Slider HorizontalOptions="LayoutOptions.FillAndExpand" Minimum="1" Maximum="@(Math.Max(Recipe.Servings * 4, 20))" @bind-Value="ServingsBind" />
             </StackLayout>
             <Label Text="Ingredients"></Label>
-            @foreach (var ingredient in Recipe.Ingredients)
+            @foreach (var ingredient in IngredientListings)
             {
-                <Label Margin="new Thickness(left: 40, 0, 0, 0)"
-                       Text="@($"[ ] {FractionHelper.FormatFraction(GetScaledIngredient(ingredient.Quantity, Recipe.Servings, Servings))} {ingredient.Unit} {ingredient.Name}")">
-                </Label>
+                <StackLayout Orientation="StackOrientation.Horizontal"
+                             Margin="new Thickness(left: 40, 0, 0, 0)">
+                    <CheckBox VerticalOptions="LayoutOptions.Center" @bind-IsChecked="ingredient.IsDone" />
+                    <Label Text="@($"{FractionHelper.FormatFraction(GetScaledIngredient(ingredient.Ingredient.Quantity, Recipe.Servings, Servings))} {ingredient.Ingredient.Unit} {ingredient.Ingredient.Name}")"
+                           VerticalOptions="LayoutOptions.Center"
+                           TextDecorations="@(ingredient.IsDone ? TextDecorations.Strikethrough : TextDecorations.None)">
+                        <TapGestureRecognizer OnTapped="@(() => OnIngredientTapped(ingredient))" />
+                    </Label>
+                </StackLayout>
             }
 
             <Label Text="Steps"></Label>
@@ -66,6 +72,31 @@
             _servings = value;
             StateHasChanged();
         }
+    }
+
+    void OnIngredientTapped(IngredientListing ingredient)
+    {
+        ingredient.IsDone = !ingredient.IsDone;
+        StateHasChanged();
+    }
+
+    List<IngredientListing> _ingredientListings;
+    List<IngredientListing> IngredientListings
+    {
+        get
+        {
+            if (_ingredientListings == null)
+            {
+                _ingredientListings = Recipe.Ingredients.Select(i => new IngredientListing { Ingredient = i }).ToList();
+            }
+            return _ingredientListings;
+        }
+    }
+
+    private sealed class IngredientListing
+    {
+        public bool IsDone { get; set; }
+        public Ingredient Ingredient { get; set; }
     }
 
     [Parameter]
