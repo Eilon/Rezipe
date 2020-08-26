@@ -32,6 +32,10 @@
 
     private int? _servings;
 
+    /// <summary>
+    /// Used for two-way binding the UI. Also does necessary conversion between the Slider's double and
+    /// the decimal that we use.
+    /// </summary>
     public double ServingsBind
     {
         get
@@ -44,6 +48,9 @@
         }
     }
 
+    /// <summary>
+    /// Used to calculate the number of servings to multiple the ingredients by.
+    /// </summary>
     public int Servings
     {
         get
