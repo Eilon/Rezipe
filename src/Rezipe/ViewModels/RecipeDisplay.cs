@@ -13,6 +13,7 @@ namespace Rezipe.ViewModels
             Recipe = recipe ?? throw new ArgumentNullException(nameof(recipe));
 
             IngredientListings = Recipe.Ingredients.Select(i => new IngredientListing(this, i)).ToList();
+            Steps = Recipe.Steps.Select(s => new StepListing(this, s)).ToList();
             ScaledServings = OriginalServings;
         }
 
@@ -35,7 +36,7 @@ namespace Rezipe.ViewModels
         }
 
         public TimeSpan CookTime => Recipe.CookTime;
-        public List<string> Steps => Recipe.Steps;
+        public List<StepListing> Steps { get; }
 
         public void OnChanged()
         {
