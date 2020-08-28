@@ -23,7 +23,7 @@
                     <CheckBox VerticalOptions="LayoutOptions.Center" @bind-IsChecked="ingredient.IsDone" />
                     <Label Text="@($"{FractionHelper.FormatFraction(ingredient.Quantity)} {ingredient.Unit} {ingredient.Name}")"
                            VerticalOptions="LayoutOptions.Center"
-                           TextDecorations="@(ingredient.IsDone ? TextDecorations.Strikethrough : TextDecorations.None)">
+                           Opacity="@(ingredient.IsDone ? 0.5d : 1d)">
                         <TapGestureRecognizer OnTapped="@(() => OnIngredientTapped(ingredient))" />
                     </Label>
                 </StackLayout>
