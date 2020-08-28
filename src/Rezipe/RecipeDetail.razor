@@ -39,7 +39,9 @@
         </StackLayout>
     </ScrollView>
 </ContentView>
-@code {
+
+@code
+{
     RecipeDisplay Recipe;
 
     /// <summary>
@@ -55,20 +57,17 @@
         set
         {
             Recipe.ScaledServings = Convert.ToInt32(Math.Round(value));
-            StateHasChanged();
         }
     }
 
     void OnIngredientTapped(IngredientListing ingredient)
     {
         ingredient.IsDone = !ingredient.IsDone;
-        StateHasChanged();
     }
 
     void OnOriginalServingsTapped()
     {
         Recipe.ScaledServings = Recipe.OriginalServings;
-        StateHasChanged();
     }
 
     [Parameter]
@@ -77,6 +76,7 @@
         set
         {
             Recipe = new RecipeDisplay(Recipes.GetRecipes().Single(r => r.ID == value));
+            Recipe.Changed += (s, e) => StateHasChanged();
         }
     }
 }

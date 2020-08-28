@@ -6,6 +6,8 @@ namespace Rezipe.ViewModels
 {
     public class RecipeDisplay
     {
+        private int _scaledServings;
+
         public RecipeDisplay(Recipe recipe)
         {
             Recipe = recipe ?? throw new ArgumentNullException(nameof(recipe));
@@ -19,8 +21,27 @@ namespace Rezipe.ViewModels
         public string Title => Recipe.Title;
         public List<IngredientListing> IngredientListings { get; }
         public int OriginalServings => Recipe.Servings;
-        public int ScaledServings { get; set; }
+        public int ScaledServings
+        {
+            get => _scaledServings;
+            set
+            {
+                if (_scaledServings != value)
+                {
+                    _scaledServings = value;
+                    OnChanged();
+                }
+            }
+        }
+
         public TimeSpan CookTime => Recipe.CookTime;
         public List<string> Steps => Recipe.Steps;
+
+        public void OnChanged()
+        {
+            Changed?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event EventHandler Changed;
     }
 }

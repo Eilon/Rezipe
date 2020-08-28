@@ -17,7 +17,22 @@ namespace Rezipe.ViewModels
         private RecipeDisplay RecipeDisplay { get; }
         private Ingredient Ingredient { get; }
 
-        public bool IsDone { get; set; }
+        private bool _isDone;
+        public bool IsDone
+        {
+            get
+            {
+                return _isDone;
+            }
+            set
+            {
+                if (_isDone != value)
+                {
+                    _isDone = value;
+                    RecipeDisplay.OnChanged();
+                }
+            }
+        }
 
         public string Name => Ingredient.Name;
         public decimal Quantity => Ingredient.Quantity * RecipeDisplay.ScaledServings / RecipeDisplay.OriginalServings;
