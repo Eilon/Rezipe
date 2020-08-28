@@ -1,0 +1,30 @@
+﻿.recipeDetailTitle {
+    font-size: 30;
+    text-align: center;
+}
+
+.recipeDetailSection {
+    font-size: 24;
+    font-weight: bold;
+}
+
+.recipeDetailIngredientQuantity {
+    font-size: 14;
+}
+
+.recipeDetailIngredientName {
+    font-size: 14;
+    font-weight: bold;
+}
+
+.recipeDetailStepTitle {
+    font-size: 16;
+    font-weight: bold;
+    margin-left: 10;
+    margin-top: 10;
+}
+
+.recipeDetailStepText {
+    font-size: 14;
+    margin-left: 20;
+}

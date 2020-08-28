@@ -4,7 +4,8 @@
 <ContentView>
     <ScrollView>
         <StackLayout Padding="10">
-            <Label Text="@Recipe.Title" FontSize="30" HorizontalTextAlignment="TextAlignment.Center"></Label>
+            <Label class="recipeDetailTitle" Text="@Recipe.Title" />
+
             <StackLayout Orientation="StackOrientation.Horizontal">
                 <Label>
                     <Span>Servings: @Recipe.ScaledServings</Span>
@@ -15,44 +16,51 @@
                 </Label>
                 <Slider HorizontalOptions="LayoutOptions.FillAndExpand" Minimum="1" Maximum="@(Math.Max(Recipe.OriginalServings * 4, 20))" @bind-Value="ServingsBind" />
             </StackLayout>
-            <Label Text="Ingredients" FontAttributes="FontAttributes.Bold" />
-            <Grid ColumnDefinitions="1*, 1*, 4*" RowDefinitions="@string.Join(",", Enumerable.Range(0, Recipe.IngredientListings.Count).Select(_ => "Auto"))">
+
+            <Label class="recipeDetailSection" Text="Ingredients" />
+
+            <Grid ColumnDefinitions="1*, 1*, 4*" RowDefinitions="@string.Join(",", Enumerable.Range(0, Recipe.IngredientListings.Count).Select(_ => "Auto"))"
+                  Margin="new Thickness(left: 20, 0, 0, 0)">
                 @for (int i = 0; i < Recipe.IngredientListings.Count; i++)
                 {
                     var ingredient = Recipe.IngredientListings[i];
 
                     <GridCell Row="@i" Column="0">
-                        <CheckBox VerticalOptions="LayoutOptions.Center" @bind-IsChecked="ingredient.IsDone"
-                                  Margin="new Thickness(left: 20, 0, 0, 0)" />
+                        <CheckBox VerticalOptions="LayoutOptions.Center" @bind-IsChecked="ingredient.IsDone" />
                     </GridCell>
                     <GridCell Row="@i" Column="1">
-                        <Label Text="@($"{FractionHelper.FormatFraction(ingredient.Quantity)} {ingredient.Unit}")"
-                               FontSize="14"
+                        <Label class="recipeDetailIngredientQuantity"
+                               Text="@($"{FractionHelper.FormatFraction(ingredient.Quantity)} {ingredient.Unit}")"
                                VerticalOptions="LayoutOptions.Center"
-                               Opacity="@(ingredient.IsDone ? 0.5d : 1d)">
+                               Opacity="@GetDoneOpacity(ingredient.IsDone)">
                             <TapGestureRecognizer OnTapped="@(() => OnIngredientTapped(ingredient))" />
                         </Label>
                     </GridCell>
                     <GridCell Row="@i" Column="2">
-                        <Label Text="@($"{ingredient.Name}")"
-                               FontSize="14"
-                               FontAttributes="FontAttributes.Bold"
+                        <Label Text="@ingredient.Name"
                                VerticalOptions="LayoutOptions.Center"
-                               Opacity="@(ingredient.IsDone ? 0.5d : 1d)">
+                               Opacity="@GetDoneOpacity(ingredient.IsDone)">
                             <TapGestureRecognizer OnTapped="@(() => OnIngredientTapped(ingredient))" />
                         </Label>
                     </GridCell>
                 }
             </Grid>
 
-            <Label Text="Steps" FontAttributes="FontAttributes.Bold" />
+            <Label class="recipeDetailSection" Text="Directions" />
+
             @for (int i = 0; i < Recipe.Steps.Count; i++)
             {
                 var step = Recipe.Steps[i];
 
-                <Label Margin="new Thickness(left: 20, 0, 0, 0)"
-                       Text="@($"{i+1}. {Recipe.Steps[i].Step}")"
-                       Opacity="@(step.IsDone ? 0.5d : 1d)">
+                <Label class="recipeDetailStepTitle"
+                       Text="@($"Step {i+1}.")"
+                       Opacity="@GetDoneOpacity(step.IsDone)">
+                    <TapGestureRecognizer OnTapped="@(() => OnStepTapped(step))" />
+                </Label>
+
+                <Label class="recipeDetailStepText"
+                       Text="@Recipe.Steps[i].Step"
+                       Opacity="@GetDoneOpacity(step.IsDone)">
                     <TapGestureRecognizer OnTapped="@(() => OnStepTapped(step))" />
                 </Label>
             }
@@ -78,6 +86,11 @@
         {
             Recipe.ScaledServings = Convert.ToInt32(Math.Round(value));
         }
+    }
+
+    double GetDoneOpacity(bool isDone)
+    {
+        return isDone ? 0.5 : 1.0;
     }
 
     void OnIngredientTapped(IngredientListing ingredient)
