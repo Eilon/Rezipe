@@ -80,6 +80,25 @@ namespace Rezipe
                     "Return to oven to melt cheese, 5 minutes.",
                 },
             },
+
+            new Recipe
+            {
+                ID = 3,
+                Title= "Simple recipe",
+                Servings = 1,
+                CookTime = new TimeSpan(hours: 0, minutes: 5, seconds: 0),
+                Ingredients = new List<Ingredient>
+                {
+                    new Ingredient{ Name="water", Quantity=1m, Unit="cup", },
+                    new Ingredient{ Name="instant noodles", Quantity=1m, Unit="pkg", },
+                },
+                Steps = new List<string>
+                {
+                    "Boil water",
+                    "Add noodles",
+                    "Stir",
+                },
+            },
         };
 
         public List<Recipe> GetRecipes()
