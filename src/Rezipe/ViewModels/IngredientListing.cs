@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezipe.Stores;
+using System;
 
 namespace Rezipe.ViewModels
 {

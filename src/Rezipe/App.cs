@@ -1,7 +1,8 @@
-﻿using Microsoft.MobileBlazorBindings;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.MobileBlazorBindings;
+using Rezipe.Stores;
 using Xamarin.Forms;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Rezipe
 {

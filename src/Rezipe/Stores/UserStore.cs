@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Rezipe
+namespace Rezipe.Stores
 {
     public class UserStore
     {
