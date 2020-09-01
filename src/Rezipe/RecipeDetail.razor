@@ -1,10 +1,17 @@
 ﻿@page "/recipedetails/{id}"
 @inject RecipeStore Recipes
+@inject UserStore UserStore
 
 <ContentView>
     <ScrollView>
         <StackLayout Padding="10">
-            <Label class="recipeDetailTitle" Text="@Recipe.Title" />
+            <StackLayout Orientation="StackOrientation.Horizontal">
+                <Label class="recipeDetailTitle" Text="@Recipe.Title" HorizontalOptions="LayoutOptions.FillAndExpand" />
+
+                <Image Source="@(ImageSource.FromResource(isFavorite ? "Rezipe.images.favorite.png" : "Rezipe.images.not-favorite.png"))" />
+
+                <TapGestureRecognizer OnTapped="OnFavoriteTapped" />
+            </StackLayout>
 
             <StackLayout Orientation="StackOrientation.Horizontal">
                 <Label>
@@ -70,6 +77,7 @@
 
 @code
 {
+    Recipe OriginalRecipe;
     RecipeDisplay Recipe;
 
     /// <summary>
@@ -108,12 +116,34 @@
         Recipe.ScaledServings = Recipe.OriginalServings;
     }
 
+    bool isFavorite;
+
+    void OnFavoriteTapped()
+    {
+        if (isFavorite)
+        {
+            UserStore.RemoveFavoriteRecipe(OriginalRecipe);
+        }
+        else
+        {
+            UserStore.AddFavoriteRecipe(OriginalRecipe);
+        }
+        isFavorite = !isFavorite;
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+        isFavorite = UserStore.IsFavoriteRecipe(OriginalRecipe);
+        return base.OnParametersSetAsync();
+    }
+
     [Parameter]
     public int id
     {
         set
         {
-            Recipe = new RecipeDisplay(Recipes.GetRecipes().Single(r => r.ID == value));
+            OriginalRecipe = Recipes.GetRecipes().Single(r => r.ID == value);
+            Recipe = new RecipeDisplay(OriginalRecipe);
             Recipe.Changed += (s, e) => StateHasChanged();
         }
     }

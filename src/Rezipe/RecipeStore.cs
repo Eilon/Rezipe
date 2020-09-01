@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Rezipe
 {
@@ -106,6 +107,10 @@ namespace Rezipe
             return _recipes;
         }
 
+        public Recipe GetRecipe(int id)
+        {
+            return _recipes.Single(r => r.ID == id);
+        }
     }
 
     public class Recipe
