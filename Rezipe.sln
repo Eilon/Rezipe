@@ -80,6 +80,7 @@ Global
 		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Debug|Any CPU.ActiveCfg = Debug|iPhone
 		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Debug|iPhone.Build.0 = Debug|iPhone
+		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Debug|iPhone.Deploy.0 = Debug|iPhone
 		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Debug|x64.ActiveCfg = Debug|iPhone
@@ -87,6 +88,7 @@ Global
 		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Release|Any CPU.ActiveCfg = Release|iPhone
 		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Release|iPhone.ActiveCfg = Release|iPhone
 		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Release|iPhone.Build.0 = Release|iPhone
+		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Release|iPhone.Deploy.0 = Release|iPhone
 		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{3F7E01E5-F518-4C69-B374-F575199E5CC1}.Release|x64.ActiveCfg = Release|iPhone

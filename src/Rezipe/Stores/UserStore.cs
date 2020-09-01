@@ -14,6 +14,13 @@ namespace Rezipe.Stores
             _recipeStore = recipeStore;
         }
 
+        public EventHandler FavoritesChanged;
+
+        private void OnFavoritesChanged()
+        {
+            FavoritesChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         public bool IsFavoriteRecipe(Recipe recipe)
         {
             if (recipe is null)
@@ -41,6 +48,7 @@ namespace Rezipe.Stores
             if (!_favorites.Contains(recipe.ID))
             {
                 _favorites.Add(recipe.ID);
+                OnFavoritesChanged();
             }
         }
 
@@ -54,6 +62,7 @@ namespace Rezipe.Stores
             if (_favorites.Contains(recipe.ID))
             {
                 _favorites.Remove(recipe.ID);
+                OnFavoritesChanged();
             }
         }
     }

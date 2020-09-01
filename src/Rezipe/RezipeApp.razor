@@ -14,9 +14,15 @@
                     Title="Recipes"
                     FlyoutDisplayOptions="FlyoutDisplayOptions.AsMultipleItems">
 
-            <ShellContent Route="my"
-                          Title="My Recipes">
-                <RecipePage @ref="recipePage" />
+            <ShellContent Route="all"
+                          Title="All Recipes">
+                <AllRecipes />
+            </ShellContent>
+
+            <ShellContent @ref="favRecipesPage"
+                          Route="favorites"
+                          Title="Favorite Recipes">
+                <FavoriteRecipes />
             </ShellContent>
 
         </FlyoutItem>
@@ -31,7 +37,7 @@
 
 @code
 {
-    RecipePage recipePage;
+    Microsoft.MobileBlazorBindings.Elements.ShellContent favRecipesPage;
 
     void OnNavigated(ShellNavigatedEventArgs e)
     {
@@ -45,7 +51,7 @@
     {
         if (firstRender)
         {
-            recipePage.GoToRecipePage();
+            Xamarin.Forms.Shell.Current.CurrentItem = favRecipesPage.NativeControl;
         }
     }
 }

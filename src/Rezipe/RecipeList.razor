@@ -1,0 +1,39 @@
+﻿@inject ShellNavigationManager NavigationManager
+
+<ContentPage>
+    <ScrollView>
+        <StackLayout Margin="new Thickness(20)">
+
+            <Label Text="@Title"
+                   FontSize="40" />
+
+            @if (!Recipes.Any())
+            {
+                <Label Text="No recipes in this list"
+                       FontSize="16"
+                       Margin="new Thickness(horizontalSize: 0, verticalSize: 20)"
+                       HorizontalTextAlignment="TextAlignment.Center"
+                       Opacity="0.5"/>
+            }
+            else
+            {
+                foreach (var recipe in Recipes)
+                {
+                    <RecipeLink Recipe="recipe" OnClick="RecipeClicked" />
+                }
+            }
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
+
+
+@code {
+    [Parameter] public List<Recipe> Recipes { get; set; }
+    [Parameter] public string Title { get; set; }
+
+    async Task RecipeClicked(Recipe recipe)
+    {
+        await NavigationManager.NavigateToAsync($"/recipedetails/{recipe.ID}");
+    }
+}
