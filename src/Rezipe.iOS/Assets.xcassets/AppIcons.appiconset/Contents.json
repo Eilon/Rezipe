@@ -1,0 +1,63 @@
+{
+  "images": [
+    {
+      "scale": "1x",
+      "size": "1024x1024",
+      "idiom": "ios-marketing",
+      "filename": "rezipe-logo-1024.png"
+    },
+    {
+      "scale": "3x",
+      "size": "20x20",
+      "idiom": "iphone",
+      "filename": "rezipe-logo-60@3x.png"
+    },
+    {
+      "scale": "2x",
+      "size": "29x29",
+      "idiom": "iphone",
+      "filename": "rezipe-logo-58@2x.png"
+    },
+    {
+      "scale": "3x",
+      "size": "29x29",
+      "idiom": "iphone",
+      "filename": "rezipe-logo-87@3x.png"
+    },
+    {
+      "scale": "2x",
+      "size": "40x40",
+      "idiom": "iphone",
+      "filename": "rezipe-logo-80@2x.png"
+    },
+    {
+      "scale": "2x",
+      "size": "20x20",
+      "idiom": "iphone",
+      "filename": "rezipe-logo-40@2x.png"
+    },
+    {
+      "scale": "3x",
+      "size": "40x40",
+      "idiom": "iphone",
+      "filename": "rezipe-logo-120@3x.png"
+    },
+    {
+      "scale": "2x",
+      "size": "60x60",
+      "idiom": "iphone",
+      "filename": "rezipe-logo-120@2x.png"
+    },
+    {
+      "scale": "3x",
+      "size": "60x60",
+      "idiom": "iphone",
+      "filename": "rezipe-logo-180@3x.png"
+    }
+  ],
+  "properties": {},
+  "info": {
+    "version": 1,
+    "author": "xcode"
+  }
+}
