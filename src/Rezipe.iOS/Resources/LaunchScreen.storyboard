@@ -13,11 +13,11 @@
                         <viewControllerLayoutGuide type="bottom" id="9ZL-r4-8FZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yd7-JS-zBw">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="Icon-60.png" translatesAutoresizingMaskIntoConstraints="NO" id="23">
-                                <rect key="frame" x="270" y="270" width="60" height="60"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23" image="LaunchImages">
+                                <rect key="frame" x="72" y="265" width="269" height="284"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                             </imageView>
                         </subviews>
@@ -25,6 +25,10 @@
                         <constraints>
                             <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" priority="1" id="39"/>
                             <constraint firstItem="23" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" priority="1" id="41"/>
+                            <constraint id="263" firstItem="23" firstAttribute="top" secondItem="Y8P-hJ-Z43" secondAttribute="bottom" constant="245"/>
+                            <constraint id="265" firstItem="9ZL-r4-8FZ" firstAttribute="top" secondItem="23" secondAttribute="bottom" constant="347"/>
+                            <constraint id="267" firstItem="23" firstAttribute="leading" secondItem="yd7-JS-zBw" secondAttribute="leadingMargin" constant="52"/>
+                            <constraint id="268" firstAttribute="trailingMargin" secondItem="23" secondAttribute="trailing" constant="53"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -34,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon-60.png" width="180" height="180"/>
+        <image name="LaunchImages" width="504" height="504"/>
     </resources>
 </document>

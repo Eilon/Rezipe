@@ -1,0 +1,29 @@
+{
+  "images": [
+    {
+      "appearances": [],
+      "idiom": "universal",
+      "filename": "rezipe-logo.pdf"
+    },
+    {
+      "appearances": [],
+      "scale": "1x",
+      "idiom": "universal"
+    },
+    {
+      "appearances": [],
+      "scale": "2x",
+      "idiom": "universal"
+    },
+    {
+      "appearances": [],
+      "scale": "3x",
+      "idiom": "universal"
+    }
+  ],
+  "properties": {},
+  "info": {
+    "version": 1,
+    "author": ""
+  }
+}
