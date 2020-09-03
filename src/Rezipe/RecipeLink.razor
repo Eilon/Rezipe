@@ -1,4 +1,6 @@
-﻿<Grid Padding="new Thickness(10)" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, *">
+﻿@inject UserStore UserStore
+
+<Grid Padding="new Thickness(10)" RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, *, Auto">
     <TapGestureRecognizer OnTapped="Details" />
     <GridCell RowSpan="2">
         @*<Image Source="new UriImageSource { Uri=new Uri(Animal.ImageUrl) }"
@@ -18,10 +20,19 @@
             <Span>Servings: @Recipe.Servings; cook time: @GetCookTimeDisplay(Recipe.CookTime)</Span>
         </Label>
     </GridCell>
+
+    <GridCell Column="2" RowSpan="2">
+        @if (ShowFavorite && UserStore.IsFavoriteRecipe(Recipe))
+        {
+            <Image Source="@(ImageSource.FromResource("Rezipe.images.favorite.png"))" />
+        }
+    </GridCell>
 </Grid>
 
 @code
 {
+    [Parameter] public bool ShowFavorite { get; set; }
+
     [Parameter] public Recipe Recipe { get; set; }
 
     [Parameter] public EventCallback<Recipe> OnClick { get; set; }
@@ -30,6 +41,13 @@
     {
         if (OnClick.HasDelegate)
             OnClick.InvokeAsync(Recipe);
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        UserStore.FavoritesChanged += (s, e) => StateHasChanged();
+
+        return base.OnInitializedAsync();
     }
 
     private static string GetCookTimeDisplay(TimeSpan cookTime)

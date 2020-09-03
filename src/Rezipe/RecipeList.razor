@@ -4,8 +4,10 @@
     <ScrollView>
         <StackLayout Margin="new Thickness(20)">
 
-            <Label Text="@Title"
-                   FontSize="40" />
+            <Label>
+                <Span FontSize="40">@Title</Span>
+                <Span FontSize="20">(@Recipes.Count)</Span>
+            </Label>
 
             @if (!Recipes.Any())
             {
@@ -13,13 +15,13 @@
                        FontSize="16"
                        Margin="new Thickness(horizontalSize: 0, verticalSize: 20)"
                        HorizontalTextAlignment="TextAlignment.Center"
-                       Opacity="0.5"/>
+                       Opacity="0.5" />
             }
             else
             {
                 foreach (var recipe in Recipes)
                 {
-                    <RecipeLink Recipe="recipe" OnClick="RecipeClicked" />
+                    <RecipeLink Recipe="recipe" OnClick="RecipeClicked" ShowFavorite="@ShowFavorite" />
                 }
             }
 
@@ -29,6 +31,7 @@
 
 
 @code {
+    [Parameter] public bool ShowFavorite { get; set; }
     [Parameter] public List<Recipe> Recipes { get; set; }
     [Parameter] public string Title { get; set; }
 
