@@ -8,9 +8,7 @@
             <StackLayout Orientation="StackOrientation.Horizontal">
                 <Label class="recipeDetailTitle" Text="@Recipe.Title" HorizontalOptions="LayoutOptions.FillAndExpand" />
 
-                <Image Source="@(ImageSource.FromResource(isFavorite ? "Rezipe.images.favorite.png" : "Rezipe.images.not-favorite.png"))" />
-
-                <TapGestureRecognizer OnTapped="OnFavoriteTapped" />
+                <ImageButton OnClick="OnFavoriteClicked" Source="@(ImageSource.FromResource(isFavorite ? "Rezipe.images.favorite.png" : "Rezipe.images.not-favorite.png"))" />
             </StackLayout>
 
             <StackLayout Orientation="StackOrientation.Horizontal">
@@ -118,7 +116,7 @@
 
     bool isFavorite;
 
-    void OnFavoriteTapped()
+    void OnFavoriteClicked()
     {
         if (isFavorite)
         {
