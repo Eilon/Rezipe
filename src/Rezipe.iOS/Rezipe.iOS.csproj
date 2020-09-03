@@ -112,7 +112,13 @@
     <ImageAsset Include="Assets.xcassets\LaunchImages.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\LaunchImages.imageset\rezipe-logo.pdf">
+    <ImageAsset Include="Assets.xcassets\LaunchImages.imageset\rezipe-logo-1024@1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.imageset\rezipe-logo-1024@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.imageset\rezipe-logo-1024@3x.png">
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
