@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -13,11 +13,13 @@
 
   <ItemGroup>
     <None Remove="images\favorite.png" />
+    <None Remove="images\flyout-background.png" />
     <None Remove="images\not-favorite.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="images\favorite.png" />
+    <EmbeddedResource Include="images\flyout-background.png" />
     <EmbeddedResource Include="images\not-favorite.png" />
   </ItemGroup>
 

@@ -1,12 +1,30 @@
 ﻿@inject RecipeStore Recipes
 @inject ShellNavigationManager NavigationManager
+@using XF = Xamarin.Forms
 
 <Shell OnNavigated="OnNavigated"
        OnNavigating="OnNavigating"
-       FlyoutBackgroundImage="@(new FileImageSource { File = "photo.jpg" })"
-       FlyoutBackgroundImageAspect="Aspect.AspectFill"
-       FlyoutHeaderBehavior="FlyoutHeaderBehavior.CollapseOnScroll">
-
+       FlyoutHeaderBehavior="FlyoutHeaderBehavior.CollapseOnScroll"
+       FlyoutBackgroundColor="Color.DarkGray">
+    <FlyoutHeader>
+        <ContentView HeightRequest="200">
+            <Grid BackgroundColor="Color.Gray">
+                <GridCell>
+                    <Image Aspect="Aspect.AspectFill"
+                           Source="@(ImageSource.FromResource("Rezipe.images.flyout-background.png"))"
+                           Opacity="0.6" />
+                </GridCell>
+                <GridCell>
+                    <Label Text="Rezipe"
+                           TextColor="Color.White"
+                           FontSize="40"
+                           FontAttributes="FontAttributes.Bold"
+                           HorizontalTextAlignment="TextAlignment.Center"
+                           VerticalTextAlignment="TextAlignment.Center" />
+                </GridCell>
+            </Grid>
+        </ContentView>
+    </FlyoutHeader>
     <ChildContent>
         <StyleSheet Resource="app-styles.css" Assembly="GetType().Assembly" />
 
@@ -51,6 +69,8 @@
     {
         if (firstRender)
         {
+            Xamarin.Forms.Shell.Current.ItemTemplate = GetShellItemTemplate();
+
             Xamarin.Forms.Shell.Current.CurrentItem = favRecipesPage.NativeControl;
         }
     }
