@@ -8,21 +8,17 @@
             <Label FontSize="22">
                 <Span FontAttributes="FontAttributes.Bold"
                       FontSize="22">Rezipe</Span>
-                <Span> </Span>
+                <Span Text=" " />
                 <Span TextColor="lightTextColor">1.0</Span>
             </Label>
             <Label>
-                <Span>This app is written in Blazor and C# with the </Span>
-                <Span FontAttributes="FontAttributes.Bold"
-                      TextColor="Color.Blue"
-                      TextDecorations="TextDecorations.Underline">Xamarin Platform</Span>
-                <Span>.</Span>
+                <Span>This app is written in Blazor and C# with the Xamarin Platform.</Span>
             </Label>
-            <Button Margin="new Thickness(0,10,0,0)"
+            <Button Margin="new Thickness(0,top: 10,0,0)"
                     OnClick="OpenWeb"
                     BackgroundColor="primaryColor"
                     TextColor="Color.White">
-                Learn more
+                Help, Support, and Privacy Info
             </Button>
         </StackLayout>
     </ScrollView>
@@ -35,6 +31,6 @@
 
     async Task OpenWeb()
     {
-        await Launcher.OpenAsync(new Uri("https://docs.microsoft.com/en-us/xamarin/xamarin-forms/"));
+        await Launcher.OpenAsync(new Uri("https://eilon.github.io/Rezipe/"));
     }
 }
