@@ -33,13 +33,15 @@
                     FlyoutDisplayOptions="FlyoutDisplayOptions.AsMultipleItems">
 
             <ShellContent Route="all"
-                          Title="All Recipes">
+                          Title="All Recipes"
+                          Icon="@(ImageSource.FromResource("Rezipe.images.all-recipes-icon.png"))">
                 <AllRecipes />
             </ShellContent>
 
             <ShellContent @ref="favRecipesPage"
                           Route="favorites"
-                          Title="Favorite Recipes">
+                          Title="Favorite Recipes"
+                          Icon="@(ImageSource.FromResource("Rezipe.images.favorites-icon.png"))">
                 <FavoriteRecipes />
             </ShellContent>
 
