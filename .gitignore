@@ -354,3 +354,6 @@ MigrationBackup/
 
 # Xamarin auto-generated Android resources
 Resource.designer.cs
+
+# Mac files
+.DS_Store
