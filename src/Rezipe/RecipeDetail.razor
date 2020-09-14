@@ -11,16 +11,22 @@
                 <ImageButton OnClick="OnFavoriteClicked" Source="@(ImageSource.FromResource(isFavorite ? "Rezipe.images.favorite.png" : "Rezipe.images.not-favorite.png"))" />
             </StackLayout>
 
-            <StackLayout Orientation="StackOrientation.Horizontal">
-                <Label>
-                    <Span>Servings: @Recipe.ScaledServings</Span>
-                </Label>
-                <Label>
-                    <Span>(orig: @Recipe.OriginalServings)</Span>
-                    <TapGestureRecognizer OnTapped="OnOriginalServingsTapped" />
-                </Label>
-                <Slider HorizontalOptions="LayoutOptions.FillAndExpand" Minimum="1" Maximum="@(Math.Max(Recipe.OriginalServings * 4, 20))" @bind-Value="ServingsBind" />
-            </StackLayout>
+            <Grid ColumnDefinitions="1*, 2*" RowDefinitions="Auto, Auto">
+                <GridCell>
+                    <Label>
+                        <Span>Servings: @Recipe.ScaledServings</Span>
+                    </Label>
+                </GridCell>
+                <GridCell Row="1">
+                    <Label Opacity="@(Recipe.ScaledServings == Recipe.OriginalServings ? 0 : 0.5)" FontSize="14">
+                        <Span>(reset to @Recipe.OriginalServings)</Span>
+                        <TapGestureRecognizer OnTapped="OnOriginalServingsTapped" />
+                    </Label>
+                </GridCell>
+                <GridCell Column="1" RowSpan="2">
+                    <Slider Minimum="1" Maximum="@(Math.Max(Recipe.OriginalServings * 4, 20))" @bind-Value="ServingsBind" />
+                </GridCell>
+            </Grid>
 
             <Label class="recipeDetailSection" Text="Ingredients" />
 
