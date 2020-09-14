@@ -1,4 +1,23 @@
 ﻿@page "/recipes/all"
 @inject RecipeStore Recipes
 
-<RecipeList Recipes="@Recipes.GetRecipes()" Title="All Recipes" ShowFavorite="true" />
+<RecipeList Recipes="@Recipes.GetRecipes()" Title="All Recipes" ShowFavorite="true">
+    <RecipeListFooter>
+        <StackLayout Padding="20">
+            <Label Text="More delicious recipes"
+                   FontSize="20"
+                   Opacity="0.5"
+                   HorizontalTextAlignment="TextAlignment.Center"
+                   LineBreakMode="LineBreakMode.WordWrap"
+                   FontAttributes="FontAttributes.Italic">
+            </Label>
+            <Label Text="coming soon!"
+                   FontSize="20"
+                   Opacity="0.5"
+                   HorizontalTextAlignment="TextAlignment.Center"
+                   LineBreakMode="LineBreakMode.WordWrap"
+                   FontAttributes="FontAttributes.Italic">
+            </Label>
+        </StackLayout>
+    </RecipeListFooter>
+</RecipeList>

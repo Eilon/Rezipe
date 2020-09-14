@@ -37,6 +37,11 @@
                     {
                         <RecipeLink Recipe="recipe" OnClick="RecipeClicked" ShowFavorite="@ShowFavorite" />
                     }
+
+                    @if (RecipeListFooter != null)
+                    {
+                        @RecipeListFooter
+                    }
                 }
             }
 
@@ -47,6 +52,7 @@
 
 @code {
     [Parameter] public bool ShowFavorite { get; set; }
+    [Parameter] public RenderFragment RecipeListFooter { get; set; }
     [Parameter] public List<Recipe> Recipes { get; set; }
     [Parameter] public string Title { get; set; }
 
