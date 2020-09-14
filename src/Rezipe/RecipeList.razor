@@ -6,22 +6,37 @@
 
             <Label>
                 <Span FontSize="40">@Title</Span>
-                <Span FontSize="20">(@Recipes.Count)</Span>
+                @if (Recipes != null)
+                {
+                    <Span FontSize="20">(@Recipes.Count)</Span>
+                }
             </Label>
 
-            @if (!Recipes.Any())
+            @if (Recipes == null)
             {
-                <Label Text="No recipes in this list"
-                       FontSize="16"
+                <Label Text="(Loading...)"
+                       FontSize="20"
                        Margin="new Thickness(horizontalSize: 0, verticalSize: 20)"
                        HorizontalTextAlignment="TextAlignment.Center"
                        Opacity="0.5" />
+                <ActivityIndicator IsRunning="true" />
             }
             else
             {
-                foreach (var recipe in Recipes)
+                if (!Recipes.Any())
                 {
-                    <RecipeLink Recipe="recipe" OnClick="RecipeClicked" ShowFavorite="@ShowFavorite" />
+                    <Label Text="No recipes in this list"
+                           FontSize="16"
+                           Margin="new Thickness(horizontalSize: 0, verticalSize: 20)"
+                           HorizontalTextAlignment="TextAlignment.Center"
+                           Opacity="0.5" />
+                }
+                else
+                {
+                    foreach (var recipe in Recipes)
+                    {
+                        <RecipeLink Recipe="recipe" OnClick="RecipeClicked" ShowFavorite="@ShowFavorite" />
+                    }
                 }
             }
 

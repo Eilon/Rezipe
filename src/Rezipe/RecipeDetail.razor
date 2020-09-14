@@ -116,23 +116,23 @@
 
     bool isFavorite;
 
-    void OnFavoriteClicked()
+    async Task OnFavoriteClicked()
     {
         if (isFavorite)
         {
-            UserStore.RemoveFavoriteRecipe(OriginalRecipe);
+            await UserStore.RemoveFavoriteRecipe(OriginalRecipe);
         }
         else
         {
-            UserStore.AddFavoriteRecipe(OriginalRecipe);
+            await UserStore.AddFavoriteRecipe(OriginalRecipe);
         }
         isFavorite = !isFavorite;
     }
 
-    protected override Task OnParametersSetAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        isFavorite = UserStore.IsFavoriteRecipe(OriginalRecipe);
-        return base.OnParametersSetAsync();
+        isFavorite = await UserStore.IsFavoriteRecipe(OriginalRecipe);
+        await base.OnParametersSetAsync();
     }
 
     [Parameter]

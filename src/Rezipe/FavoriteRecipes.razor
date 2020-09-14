@@ -1,16 +1,23 @@
 ﻿@page "/recipes/favorites"
-@inject ShellNavigationManager NavigationManager
-@inject RecipeStore Recipes
 @inject UserStore UserStore
 
-<RecipeList Recipes="@UserStore.GetFavoriteRecipes()" Title="Favorite recipes" />
+<RecipeList Recipes="@favoriteRecipes" Title="Favorite recipes" />
 
 @code
 {
-    protected override Task OnInitializedAsync()
-    {
-        UserStore.FavoritesChanged += (s, e) => StateHasChanged();
+    List<Recipe> favoriteRecipes;
 
-        return base.OnInitializedAsync();
+    protected override async Task OnInitializedAsync()
+    {
+        UserStore.FavoritesChanged += async () => { await UpdateRecipes(); StateHasChanged(); };
+
+        await UpdateRecipes();
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task UpdateRecipes()
+    {
+        favoriteRecipes = await UserStore.GetFavoriteRecipes();
     }
 }

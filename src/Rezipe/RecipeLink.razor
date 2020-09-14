@@ -22,7 +22,7 @@
     </GridCell>
 
     <GridCell Column="2" RowSpan="2">
-        @if (ShowFavorite && UserStore.IsFavoriteRecipe(Recipe))
+        @if (isFavorite)
         {
             <Image Source="@(ImageSource.FromResource("Rezipe.images.favorite.png"))" />
         }
@@ -37,6 +37,23 @@
 
     [Parameter] public EventCallback<Recipe> OnClick { get; set; }
 
+    bool isFavorite;
+
+    private async Task UpdateIsFavorite()
+    {
+        if (ShowFavorite)
+        {
+            isFavorite = await UserStore.IsFavoriteRecipe(Recipe);
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await UpdateIsFavorite();
+
+        await base.OnParametersSetAsync();
+    }
+
     void Details()
     {
         if (OnClick.HasDelegate)
@@ -45,7 +62,7 @@
 
     protected override Task OnInitializedAsync()
     {
-        UserStore.FavoritesChanged += (s, e) => StateHasChanged();
+        UserStore.FavoritesChanged += async () => { await UpdateIsFavorite(); StateHasChanged(); };
 
         return base.OnInitializedAsync();
     }

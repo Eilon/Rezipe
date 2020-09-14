@@ -1,68 +1,91 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Rezipe.Stores
 {
     public class UserStore
     {
-        private List<int> _favorites = new List<int>();
         private readonly RecipeStore _recipeStore;
+        private UserFavoriteDatabase _userFavoriteDatabase;
 
         public UserStore(RecipeStore recipeStore)
         {
-            _recipeStore = recipeStore;
+            _recipeStore = recipeStore ?? throw new ArgumentNullException(nameof(recipeStore));
         }
 
-        public EventHandler FavoritesChanged;
 
-        private void OnFavoritesChanged()
+        public UserFavoriteDatabase FavoritesDatabase
         {
-            FavoritesChanged?.Invoke(this, EventArgs.Empty);
+            get
+            {
+                if (_userFavoriteDatabase == null)
+                {
+                    _userFavoriteDatabase =
+                        new UserFavoriteDatabase(
+                            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RezipeStore.db3"),
+                            dbChanged: NotifyFavoritesChanged);
+                }
+                return _userFavoriteDatabase;
+            }
         }
 
-        public bool IsFavoriteRecipe(Recipe recipe)
+        public event Func<Task> FavoritesChanged;
+
+        private async Task NotifyFavoritesChanged()
+        {
+            if (FavoritesChanged != null)
+            {
+                await FavoritesChanged?.Invoke();
+            }
+        }
+
+        public async Task<bool> IsFavoriteRecipe(Recipe recipe)
         {
             if (recipe is null)
             {
                 throw new ArgumentNullException(nameof(recipe));
             }
-
-            return _favorites.Contains(recipe.ID);
+            var allFavs = await FavoritesDatabase.GetFavoritesAsync();
+            return allFavs.Any(f => f.RecipeID == recipe.ID);
         }
 
-        public List<Recipe> GetFavoriteRecipes()
+        public async Task<List<Recipe>> GetFavoriteRecipes()
         {
-            return _favorites
-                .Select(i => _recipeStore.GetRecipe(i))
+            var allFavs = await FavoritesDatabase.GetFavoritesAsync();
+            return allFavs
+                .Select(f => _recipeStore.GetRecipe(f.RecipeID))
                 .ToList();
         }
 
-        public void AddFavoriteRecipe(Recipe recipe)
+        public async Task AddFavoriteRecipe(Recipe recipe)
         {
             if (recipe is null)
             {
                 throw new ArgumentNullException(nameof(recipe));
             }
 
-            if (!_favorites.Contains(recipe.ID))
+            var allFavs = await FavoritesDatabase.GetFavoritesAsync();
+            if (allFavs.All(f => f.RecipeID != recipe.ID))
             {
-                _favorites.Add(recipe.ID);
-                OnFavoritesChanged();
+                await FavoritesDatabase.AddFavoriteAsync(new UserFavorite { RecipeID = recipe.ID });
             }
         }
 
-        public void RemoveFavoriteRecipe(Recipe recipe)
+        public async Task RemoveFavoriteRecipe(Recipe recipe)
         {
             if (recipe is null)
             {
                 throw new ArgumentNullException(nameof(recipe));
             }
 
-            if (_favorites.Contains(recipe.ID))
+            var allFavs = await FavoritesDatabase.GetFavoritesAsync();
+            var matchingFavs = allFavs.Where(f => f.RecipeID == recipe.ID);
+            foreach (var matchingFav in matchingFavs)
             {
-                _favorites.Remove(recipe.ID);
-                OnFavoritesChanged();
+                await FavoritesDatabase.DeleteFavoriteAsync(matchingFav);
             }
         }
     }
