@@ -28,6 +28,11 @@
                 </GridCell>
             </Grid>
 
+            <Label>
+                <Span Text="Cook time: " />
+                <Span Text="@Recipe.CookTime.ToCookTimeDisplay()" />
+            </Label>
+
             <Label class="recipeDetailSection" Text="Ingredients" />
 
             <Grid ColumnDefinitions="1*, 1*, 4*" RowDefinitions="@string.Join(",", Enumerable.Range(0, Recipe.IngredientListings.Count).Select(_ => "Auto"))"
