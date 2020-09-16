@@ -73,7 +73,11 @@
         {
             Xamarin.Forms.Shell.Current.ItemTemplate = GetShellItemTemplate();
 
+            // Set ShellItem to the container of the Favorite Recipes page
             Xamarin.Forms.Shell.Current.CurrentItem = favRecipesPage.NativeControl;
+
+            // Set ShellContent within tabs to the actual Favorite Recipes page
+            Xamarin.Forms.Shell.Current.CurrentItem.CurrentItem = favRecipesPage.NativeControl;
         }
     }
 }
