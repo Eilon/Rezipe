@@ -18,10 +18,11 @@ namespace Rezipe.Stores
                 {
                     new Ingredient{ Name="All-purpose flour", Quantity=1.33333m, Unit="cup", },
                     new Ingredient{ Name="Sugar", Quantity=0.375m, Unit="cup", },
-                    new Ingredient{ Name="Kosher salt", Quantity=0.5m, Unit="tbsp", },
+                    new Ingredient{ Name="Kosher salt", Quantity=0.5m, Unit="tsp", },
                     new Ingredient{ Name="Baking soda", Quantity=0.5m, Unit="tsp", },
                     new Ingredient{ Name="Baking powder", Quantity=0.5m, Unit="tsp", },
                     new Ingredient{ Name="Vanilla bean, split and scraped (optional)", Quantity=1m, Unit="", },
+                    new Ingredient{ Name="Butter (unsalted)", Quantity=3m, Unit="tbsp", },
                     new Ingredient{ Name="Cultured low-fat buttermilk", Quantity=14m, Unit="oz", },
                     new Ingredient{ Name="Egg whites (large)", Quantity=2m, Unit="", },
                     new Ingredient{ Name="Vanilla extract", Quantity=1m, Unit="tsp", },
