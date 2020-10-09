@@ -47,15 +47,31 @@ namespace Rezipe.ViewModels
             OnChanged();
         }
 
-        public bool IsDefault
+        public void ResetIngredientsDone()
         {
-            get
+            foreach (var i in Ingredients)
             {
-                return OriginalServings == ScaledServings &&
-                    Ingredients.All(i => i.IsDefault) &&
-                    Steps.All(i => i.IsDefault);
+                i.IsDone = false;
             }
+            OnChanged();
         }
+
+        public void ResetStepsDone()
+        {
+            foreach (var s in Steps)
+            {
+                s.IsDone = false;
+            }
+            OnChanged();
+        }
+
+        public bool IsDefault =>
+            OriginalServings == ScaledServings &&
+            AllIngredientsDefault &&
+            AllStepsDefault;
+
+        public bool AllIngredientsDefault => Ingredients.All(i => i.IsDefault);
+        public bool AllStepsDefault => Steps.All(i => i.IsDefault);
 
         public List<RecipeIngredientViewModel> Ingredients { get; }
         public List<RecipeStepViewModel> Steps { get; }

@@ -41,7 +41,12 @@
                     <Span Text="@Recipe.CookTime.ToCookTimeDisplay()" />
                 </Label>
 
-                <Label class="recipeDetailSection" Text="Ingredients" />
+                <StackLayout Orientation="StackOrientation.Horizontal">
+                    <Label class="recipeDetailSection" Text="Ingredients" />
+                    <Label Text="(reset)" VerticalTextAlignment="TextAlignment.Center" Opacity="0.5" IsVisible="@(!Recipe.AllIngredientsDefault)">
+                        <TapGestureRecognizer OnTapped="OnResetIngredientsDoneTapped" />
+                    </Label>
+                </StackLayout>
 
                 <Grid ColumnDefinitions="1*, 1*, 4*" RowDefinitions="@string.Join(",", Enumerable.Range(0, Recipe.Ingredients.Count).Select(_ => "Auto"))"
                       Margin="new Thickness(left: 20, 0, 0, 0)">
@@ -70,7 +75,12 @@
                     }
                 </Grid>
 
-                <Label class="recipeDetailSection" Text="Directions" />
+                <StackLayout Orientation="StackOrientation.Horizontal">
+                    <Label class="recipeDetailSection" Text="Directions" />
+                    <Label Text="(reset)" VerticalTextAlignment="TextAlignment.Center" Opacity="0.5" IsVisible="@(!Recipe.AllStepsDefault)">
+                        <TapGestureRecognizer OnTapped="OnResetStepsDoneTapped" />
+                    </Label>
+                </StackLayout>
 
                 @for (int i = 0; i < Recipe.Steps.Count; i++)
                 {
@@ -166,6 +176,16 @@
     void OnOriginalServingsTapped()
     {
         Recipe.ResetServings();
+    }
+
+    void OnResetIngredientsDoneTapped()
+    {
+        Recipe.ResetIngredientsDone();
+    }
+
+    void OnResetStepsDoneTapped()
+    {
+        Recipe.ResetStepsDone();
     }
 
     bool isFavorite;
