@@ -1,21 +1,32 @@
-﻿using System;
+﻿using Rezipe.Stores.RecipeStorage;
+using System;
 
 namespace Rezipe.ViewModels
 {
-    public class StepListing
+    public class RecipeStepViewModel
     {
-        public StepListing(RecipeDisplay recipeDisplay, string step)
+        public RecipeStepViewModel(RecipeViewModel recipeDisplay, RecipeStep step, bool isDone)
         {
             if (step is null)
             {
                 throw new ArgumentNullException(nameof(step));
             }
             RecipeDisplay = recipeDisplay;
-            Step = step;
+            RecipeStep = step;
+            _isDone = isDone;
         }
 
-        private RecipeDisplay RecipeDisplay { get; }
-        public string Step { get; }
+        private RecipeViewModel RecipeDisplay { get; }
+        private RecipeStep RecipeStep { get; }
+
+        public bool IsDefault
+        {
+            get
+            {
+                return !IsDone;
+            }
+        }
+
 
         private bool _isDone;
         public bool IsDone
@@ -33,5 +44,7 @@ namespace Rezipe.ViewModels
                 }
             }
         }
+
+        public string Step => RecipeStep.Step;
     }
 }

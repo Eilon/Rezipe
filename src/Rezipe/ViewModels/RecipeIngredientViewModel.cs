@@ -1,11 +1,11 @@
-﻿using Rezipe.Stores;
+﻿using Rezipe.Stores.RecipeStorage;
 using System;
 
 namespace Rezipe.ViewModels
 {
-    public class IngredientListing
+    public class RecipeIngredientViewModel
     {
-        public IngredientListing(RecipeDisplay recipeDisplay, Ingredient ingredient)
+        public RecipeIngredientViewModel(RecipeViewModel recipeDisplay, RecipeIngredient ingredient, bool isDone)
         {
             if (ingredient is null)
             {
@@ -13,10 +13,19 @@ namespace Rezipe.ViewModels
             }
             RecipeDisplay = recipeDisplay;
             Ingredient = ingredient;
+            _isDone = isDone;
         }
 
-        private RecipeDisplay RecipeDisplay { get; }
-        private Ingredient Ingredient { get; }
+        private RecipeViewModel RecipeDisplay { get; }
+        private RecipeIngredient Ingredient { get; }
+
+        public bool IsDefault
+        {
+            get
+            {
+                return !IsDone;
+            }
+        }
 
         private bool _isDone;
         public bool IsDone

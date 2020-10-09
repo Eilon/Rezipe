@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace Rezipe.Stores
+namespace Rezipe.Stores.UserDataStorage
 {
     public sealed class UserFavorite
     {

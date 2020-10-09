@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.MobileBlazorBindings;
-using Rezipe.Stores;
+using Rezipe.Stores.RecipeStorage;
+using Rezipe.Stores.UserDataStorage;
 using Xamarin.Forms;
 
 namespace Rezipe
@@ -19,7 +20,7 @@ namespace Rezipe
                     //services.AddSingleton<AppState>();
                     services.AddSingleton<ShellNavigationManager>();
                     services.AddSingleton<RecipeStore>();
-                    services.AddSingleton<UserStore>();
+                    services.AddSingleton<UserDataStore>();
                 })
                 .Build();
 

@@ -1,93 +1,136 @@
 ﻿@page "/recipedetails/{id}"
 @inject RecipeStore Recipes
-@inject UserStore UserStore
+@inject UserDataStore UserStore
 
 <ContentView>
     <ScrollView>
-        <StackLayout Padding="10">
-            <StackLayout Orientation="StackOrientation.Horizontal">
-                <Label class="recipeDetailTitle" Text="@Recipe.Title" HorizontalOptions="LayoutOptions.FillAndExpand" />
-
-                <ImageButton OnClick="OnFavoriteClicked" Source="@(ImageSource.FromResource(isFavorite ? "Rezipe.images.favorite.png" : "Rezipe.images.not-favorite.png"))" />
+        @if (Recipe == null)
+        {
+            <StackLayout Padding="10">
+                <Label Text="Loading..." />
             </StackLayout>
+        }
+        else
+        {
+            <StackLayout Padding="10">
+                <StackLayout Orientation="StackOrientation.Horizontal">
+                    <Label class="recipeDetailTitle" Text="@Recipe.Title" HorizontalOptions="LayoutOptions.FillAndExpand" />
 
-            <Grid ColumnDefinitions="1*, 2*" RowDefinitions="Auto, Auto">
-                <GridCell>
-                    <Label>
-                        <Span>Servings: @Recipe.ScaledServings</Span>
-                    </Label>
-                </GridCell>
-                <GridCell Row="1">
-                    <Label Opacity="@(Recipe.ScaledServings == Recipe.OriginalServings ? 0 : 0.5)" FontSize="14">
-                        <Span>(reset to @Recipe.OriginalServings)</Span>
-                        <TapGestureRecognizer OnTapped="OnOriginalServingsTapped" />
-                    </Label>
-                </GridCell>
-                <GridCell Column="1" RowSpan="2">
-                    <Slider Minimum="1" Maximum="@(Math.Max(Recipe.OriginalServings * 4, 20))" @bind-Value="ServingsBind" />
-                </GridCell>
-            </Grid>
+                    <ImageButton OnClick="OnFavoriteClicked" Source="@(ImageSource.FromResource(isFavorite ? "Rezipe.images.favorite.png" : "Rezipe.images.not-favorite.png"))" />
+                </StackLayout>
 
-            <Label>
-                <Span Text="Cook time: " />
-                <Span Text="@Recipe.CookTime.ToCookTimeDisplay()" />
-            </Label>
+                <Grid ColumnDefinitions="1*, 2*" RowDefinitions="Auto, Auto">
+                    <GridCell>
+                        <Label>
+                            <Span>Servings: @Recipe.ScaledServings</Span>
+                        </Label>
+                    </GridCell>
+                    <GridCell Row="1">
+                        <Label Opacity="@(Recipe.ScaledServings == Recipe.OriginalServings ? 0 : 0.5)" FontSize="14">
+                            <Span>(reset to @Recipe.OriginalServings)</Span>
+                            <TapGestureRecognizer OnTapped="OnOriginalServingsTapped" />
+                        </Label>
+                    </GridCell>
+                    <GridCell Column="1" RowSpan="2">
+                        <Slider Minimum="1" Maximum="@(Math.Max(Recipe.OriginalServings * 4, 40))" @bind-Value="ServingsBind" />
+                    </GridCell>
+                </Grid>
 
-            <Label class="recipeDetailSection" Text="Ingredients" />
+                <Label>
+                    <Span Text="Cook time: " />
+                    <Span Text="@Recipe.CookTime.ToCookTimeDisplay()" />
+                </Label>
 
-            <Grid ColumnDefinitions="1*, 1*, 4*" RowDefinitions="@string.Join(",", Enumerable.Range(0, Recipe.IngredientListings.Count).Select(_ => "Auto"))"
-                  Margin="new Thickness(left: 20, 0, 0, 0)">
-                @for (int i = 0; i < Recipe.IngredientListings.Count; i++)
+                <Label class="recipeDetailSection" Text="Ingredients" />
+
+                <Grid ColumnDefinitions="1*, 1*, 4*" RowDefinitions="@string.Join(",", Enumerable.Range(0, Recipe.Ingredients.Count).Select(_ => "Auto"))"
+                      Margin="new Thickness(left: 20, 0, 0, 0)">
+                    @for (int i = 0; i < Recipe.Ingredients.Count; i++)
+                    {
+                        var ingredient = Recipe.Ingredients[i];
+
+                        <GridCell Row="@i" Column="0">
+                            <CheckBox VerticalOptions="LayoutOptions.Center" @bind-IsChecked="ingredient.IsDone" />
+                        </GridCell>
+                        <GridCell Row="@i" Column="1">
+                            <Label class="recipeDetailIngredientQuantity"
+                                   Text="@($"{FractionHelper.FormatFraction(ingredient.Quantity)} {ingredient.Unit}")"
+                                   VerticalOptions="LayoutOptions.Center"
+                                   Opacity="@GetDoneOpacity(ingredient.IsDone)">
+                                <TapGestureRecognizer OnTapped="@(() => OnIngredientTapped(ingredient))" />
+                            </Label>
+                        </GridCell>
+                        <GridCell Row="@i" Column="2">
+                            <Label Text="@ingredient.Name"
+                                   VerticalOptions="LayoutOptions.Center"
+                                   Opacity="@GetDoneOpacity(ingredient.IsDone)">
+                                <TapGestureRecognizer OnTapped="@(() => OnIngredientTapped(ingredient))" />
+                            </Label>
+                        </GridCell>
+                    }
+                </Grid>
+
+                <Label class="recipeDetailSection" Text="Directions" />
+
+                @for (int i = 0; i < Recipe.Steps.Count; i++)
                 {
-                    var ingredient = Recipe.IngredientListings[i];
+                    var step = Recipe.Steps[i];
 
-                    <GridCell Row="@i" Column="0">
-                        <CheckBox VerticalOptions="LayoutOptions.Center" @bind-IsChecked="ingredient.IsDone" />
-                    </GridCell>
-                    <GridCell Row="@i" Column="1">
-                        <Label class="recipeDetailIngredientQuantity"
-                               Text="@($"{FractionHelper.FormatFraction(ingredient.Quantity)} {ingredient.Unit}")"
-                               VerticalOptions="LayoutOptions.Center"
-                               Opacity="@GetDoneOpacity(ingredient.IsDone)">
-                            <TapGestureRecognizer OnTapped="@(() => OnIngredientTapped(ingredient))" />
-                        </Label>
-                    </GridCell>
-                    <GridCell Row="@i" Column="2">
-                        <Label Text="@ingredient.Name"
-                               VerticalOptions="LayoutOptions.Center"
-                               Opacity="@GetDoneOpacity(ingredient.IsDone)">
-                            <TapGestureRecognizer OnTapped="@(() => OnIngredientTapped(ingredient))" />
-                        </Label>
-                    </GridCell>
+                    <Label class="recipeDetailStepTitle"
+                           Text="@($"Step {i + 1}.")"
+                           Opacity="@GetDoneOpacity(step.IsDone)">
+                        <TapGestureRecognizer OnTapped="@(() => OnStepTapped(step))" />
+                    </Label>
+
+                    <Label class="recipeDetailStepText"
+                           Text="@Recipe.Steps[i].Step"
+                           Opacity="@GetDoneOpacity(step.IsDone)">
+                        <TapGestureRecognizer OnTapped="@(() => OnStepTapped(step))" />
+                    </Label>
                 }
-            </Grid>
-
-            <Label class="recipeDetailSection" Text="Directions" />
-
-            @for (int i = 0; i < Recipe.Steps.Count; i++)
-            {
-                var step = Recipe.Steps[i];
-
-                <Label class="recipeDetailStepTitle"
-                       Text="@($"Step {i+1}.")"
-                       Opacity="@GetDoneOpacity(step.IsDone)">
-                    <TapGestureRecognizer OnTapped="@(() => OnStepTapped(step))" />
-                </Label>
-
-                <Label class="recipeDetailStepText"
-                       Text="@Recipe.Steps[i].Step"
-                       Opacity="@GetDoneOpacity(step.IsDone)">
-                    <TapGestureRecognizer OnTapped="@(() => OnStepTapped(step))" />
-                </Label>
-            }
-        </StackLayout>
+            </StackLayout>
+        }
     </ScrollView>
 </ContentView>
 
 @code
 {
-    Recipe OriginalRecipe;
-    RecipeDisplay Recipe;
+    int recipeId;
+
+    [Parameter]
+    public int id
+    {
+        set // set by routing from page directive
+        {
+            recipeId = value;
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+
+        var originalRecipe = Recipes.GetRecipes().Single(r => r.ID == recipeId);
+        var userDataRecipe = await UserStore.GetUserDataRecipe(originalRecipe);
+        Recipe = new RecipeViewModel(originalRecipe, userDataRecipe);
+        Recipe.Changed += async (s, e) =>
+        {
+            StateHasChanged();
+
+            if (Recipe.IsDefault)
+            {
+                await UserStore.DeleteUserRecipe(userDataRecipe);
+            }
+            else
+            {
+                await UserStore.CreateOrUpdateUserDataRecipe(userDataRecipe);
+            }
+        };
+
+        isFavorite = await UserStore.IsFavoriteRecipe(originalRecipe);
+    }
+
+    RecipeViewModel Recipe;
 
     /// <summary>
     /// Used for two-way binding the UI. Also does necessary conversion between the Slider's double and
@@ -110,19 +153,19 @@
         return isDone ? 0.5 : 1.0;
     }
 
-    void OnIngredientTapped(IngredientListing ingredient)
+    void OnIngredientTapped(RecipeIngredientViewModel ingredient)
     {
         ingredient.IsDone = !ingredient.IsDone;
     }
 
-    void OnStepTapped(StepListing step)
+    void OnStepTapped(RecipeStepViewModel step)
     {
         step.IsDone = !step.IsDone;
     }
 
     void OnOriginalServingsTapped()
     {
-        Recipe.ScaledServings = Recipe.OriginalServings;
+        Recipe.ResetServings();
     }
 
     bool isFavorite;
@@ -131,29 +174,12 @@
     {
         if (isFavorite)
         {
-            await UserStore.RemoveFavoriteRecipe(OriginalRecipe);
+            await UserStore.RemoveFavoriteRecipe(Recipe.OriginalRecipe.ID);
         }
         else
         {
-            await UserStore.AddFavoriteRecipe(OriginalRecipe);
+            await UserStore.AddFavoriteRecipe(Recipe.OriginalRecipe.ID);
         }
         isFavorite = !isFavorite;
-    }
-
-    protected override async Task OnParametersSetAsync()
-    {
-        isFavorite = await UserStore.IsFavoriteRecipe(OriginalRecipe);
-        await base.OnParametersSetAsync();
-    }
-
-    [Parameter]
-    public int id
-    {
-        set
-        {
-            OriginalRecipe = Recipes.GetRecipes().Single(r => r.ID == value);
-            Recipe = new RecipeDisplay(OriginalRecipe);
-            Recipe.Changed += (s, e) => StateHasChanged();
-        }
     }
 }
