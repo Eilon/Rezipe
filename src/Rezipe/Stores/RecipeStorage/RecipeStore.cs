@@ -312,6 +312,44 @@ namespace Rezipe.Stores.RecipeStorage
                     new RecipeStep { Step = "Let stand for 10 minutes before serving." },
                 },
             },
+
+            new Recipe
+            {
+                ID = 11,
+                Title= "Beef bourguignon (slow cooker)",
+                Servings = 6,
+                CookTime = new TimeSpan(hours: 9, minutes: 30, seconds: 0),
+                Ingredients = new List<RecipeIngredient>
+                {
+                    new RecipeIngredient{ Name="Slice of bacon", Quantity=5m, Unit="", },
+                    new RecipeIngredient{ Name="Boneless beef chuck", Quantity=3m, Unit="lbs", },
+                    new RecipeIngredient{ Name="Red cooking wine", Quantity=1m, Unit="cup", },
+                    new RecipeIngredient{ Name="Chicken broth", Quantity=2m, Unit="cup", },
+                    new RecipeIngredient{ Name="Tomato sauce", Quantity=0.5m, Unit="cup", },
+                    new RecipeIngredient{ Name="Soy sauce", Quantity=0.25m, Unit="cup", },
+                    new RecipeIngredient{ Name="Flour", Quantity=0.25m, Unit="cup", },
+                    new RecipeIngredient{ Name="Garlic cloves, finely chopped", Quantity=3m, Unit="", },
+                    new RecipeIngredient{ Name="Thyme, finely chopped", Quantity=2m, Unit="tbsp", },
+                    new RecipeIngredient{ Name="Medium carrots, sliced", Quantity=5m, Unit="", },
+                    new RecipeIngredient{ Name="Baby potatoes", Quantity=1m, Unit="lbs", },
+                    new RecipeIngredient{ Name="Mushrooms", Quantity=8m, Unit="oz", },
+                    new RecipeIngredient{ Name="Chopped parsley for garnish", Quantity=1m, Unit="", },
+                },
+                Steps = new List<RecipeStep>
+                {
+                    new RecipeStep { Step = "In a large skillet cook bacon over medium high heat until crisp." },
+                    new RecipeStep { Step = "Put bacon in slow cooker." },
+                    new RecipeStep { Step = "Salt and pepper the beef and add to the skillet and sear on each side for 2-3 minutes." },
+                    new RecipeStep { Step = "Transfer beef to the slow cooker." },
+                    new RecipeStep { Step = "Add the red wine to the skillet scraping down the brown bits on the side." },
+                    new RecipeStep { Step = "Allow it to simmer and reduce and slowly add chicken broth, and tomato sauce, and soy sauce." },
+                    new RecipeStep { Step = "Slowly whisk in the flour." },
+                    new RecipeStep { Step = "Add the sauce to the slow cooker." },
+                    new RecipeStep { Step = "Add garlic, thyme, carrots, potatoes, and mushrooms to the slow cooker." },
+                    new RecipeStep { Step = "Stir and cook on low until beef is tender on low for 8-10 hours or on high for 6-8 hours." },
+                    new RecipeStep { Step = "Garnish with fresh parley and serve with mashed potatoes if desired." },
+                },
+            },
         };
 
         public List<Recipe> GetRecipes()
