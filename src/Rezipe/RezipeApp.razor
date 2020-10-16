@@ -1,11 +1,9 @@
 ﻿@inject RecipeStore Recipes
 @inject ShellNavigationManager NavigationManager
-@using XF = Xamarin.Forms
 
-<Shell OnNavigated="OnNavigated"
-       OnNavigating="OnNavigating"
+<Shell BackgroundColor="GetThemeColor(lightColor: Color.White, darkColor: Color.Black)"
        FlyoutHeaderBehavior="FlyoutHeaderBehavior.CollapseOnScroll"
-       FlyoutBackgroundColor="Color.DarkGray">
+       FlyoutBackgroundColor="GetThemeColor(lightColor: Color.LightGray, darkColor: Color.DarkGray)">
     <FlyoutHeader>
         <ContentView HeightRequest="200">
             <Grid BackgroundColor="Color.Gray">
@@ -52,32 +50,18 @@
             <AboutPage />
         </ShellContent>
 
+        @if (DebugMode)
+        {
+            <ShellContent Route="debug"
+                          Title="Debug">
+                <DebugPage />
+            </ShellContent>
+        }
+
     </ChildContent>
 </Shell>
 
 @code
 {
     Microsoft.MobileBlazorBindings.Elements.ShellContent favRecipesPage;
-
-    void OnNavigated(ShellNavigatedEventArgs e)
-    {
-    }
-
-    void OnNavigating(ShellNavigatingEventArgs e)
-    {
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender)
-        {
-            Xamarin.Forms.Shell.Current.ItemTemplate = GetShellItemTemplate();
-
-            // Set ShellItem to the container of the Favorite Recipes page
-            Xamarin.Forms.Shell.Current.CurrentItem = favRecipesPage.NativeControl;
-
-            // Set ShellContent within tabs to the actual Favorite Recipes page
-            Xamarin.Forms.Shell.Current.CurrentItem.CurrentItem = favRecipesPage.NativeControl;
-        }
-    }
 }

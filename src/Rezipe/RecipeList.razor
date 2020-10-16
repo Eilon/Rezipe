@@ -1,10 +1,10 @@
 ﻿@inject ShellNavigationManager NavigationManager
 
-<ContentPage>
+<ContentPage BackgroundColor="GetThemeColor(lightColor: Color.White, darkColor: Color.Black)">
     <ScrollView>
         <StackLayout Margin="new Thickness(20)">
 
-            <Label>
+            <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)">
                 <Span FontSize="40">@Title</Span>
                 @if (Recipes != null)
                 {
@@ -18,7 +18,8 @@
                        FontSize="20"
                        Margin="new Thickness(horizontalSize: 0, verticalSize: 20)"
                        HorizontalTextAlignment="TextAlignment.Center"
-                       Opacity="0.5" />
+                       Opacity="0.5"
+                       TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)" />
                 <ActivityIndicator IsRunning="true" />
             }
             else
@@ -29,7 +30,8 @@
                            FontSize="16"
                            Margin="new Thickness(horizontalSize: 0, verticalSize: 20)"
                            HorizontalTextAlignment="TextAlignment.Center"
-                           Opacity="0.5" />
+                           Opacity="0.5"
+                           TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)" />
                 }
                 else
                 {

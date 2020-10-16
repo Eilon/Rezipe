@@ -11,12 +11,14 @@
 
     <GridCell Column="1">
         <Label Text="@Recipe.Title"
-               FontAttributes="FontAttributes.Bold" />
+               FontAttributes="FontAttributes.Bold"
+               TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)" />
     </GridCell>
 
     <GridCell Row="1" Column="1">
         <Label FontAttributes="FontAttributes.Italic"
-               VerticalOptions="LayoutOptions.End">
+               VerticalOptions="LayoutOptions.End"
+               TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)">
             <Span>Servings: @Recipe.Servings; cook time: @Recipe.CookTime.ToCookTimeDisplay()</Span>
         </Label>
     </GridCell>

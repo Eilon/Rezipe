@@ -1,0 +1,44 @@
+﻿<ContentPage BackgroundColor="GetThemeColor(lightColor: Color.LightGray, darkColor: Color.Black)">
+    <ScrollView>
+        <StackLayout>
+            <Label FontSize="20" FontAttributes="FontAttributes.Bold" TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)" Text="Debug output" />
+            @for (int i = 0; i < _debugMessages.Count; i++)
+            {
+                var num = i;
+                var msg = _debugMessages[num];
+                <StackLayout Orientation="StackOrientation.Horizontal">
+                    <Label Margin="new Thickness(left: 10, top:10, right:10, bottom: 0)" TextColor="Color.DarkGray" VerticalTextAlignment="TextAlignment.Center">
+                        <Span>#</Span>
+                        <Span>@num</Span>
+                    </Label>
+                    <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)" Text="@msg" VerticalTextAlignment="TextAlignment.Center" />
+                </StackLayout>
+            }
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
+
+@code
+{
+    static List<string> _debugMessages = new List<string>();
+    static Action thisPageStateHasChanged;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        thisPageStateHasChanged = () => InvokeAsync(StateHasChanged);
+
+    }
+
+    public static void WriteLine(string message)
+    {
+        if (!RezipeApp.DebugMode)
+        {
+            return;
+        }
+
+        _debugMessages.Add(message);
+
+        thisPageStateHasChanged?.Invoke();
+    }
+}

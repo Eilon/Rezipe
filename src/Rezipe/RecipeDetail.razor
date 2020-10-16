@@ -7,26 +7,29 @@
         @if (Recipe == null)
         {
             <StackLayout Padding="10">
-                <Label Text="Loading..." />
+                <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)"
+                       Text="Loading..." />
             </StackLayout>
         }
         else
         {
             <StackLayout Padding="10">
                 <StackLayout Orientation="StackOrientation.Horizontal">
-                    <Label class="recipeDetailTitle" Text="@Recipe.Title" HorizontalOptions="LayoutOptions.FillAndExpand" />
+                    <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)"
+                           class="recipeDetailTitle" Text="@Recipe.Title" HorizontalOptions="LayoutOptions.FillAndExpand" />
 
                     <ImageButton OnClick="OnFavoriteClicked" Source="@(ImageSource.FromResource(isFavorite ? "Rezipe.images.favorite.png" : "Rezipe.images.not-favorite.png"))" />
                 </StackLayout>
 
                 <Grid ColumnDefinitions="1*, 2*" RowDefinitions="Auto, Auto">
                     <GridCell>
-                        <Label>
+                        <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)">
                             <Span>Servings: @Recipe.ScaledServings</Span>
                         </Label>
                     </GridCell>
                     <GridCell Row="1">
-                        <Label Opacity="@(Recipe.ScaledServings == Recipe.OriginalServings ? 0 : 0.5)" FontSize="14">
+                        <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)"
+                               Opacity="@(Recipe.ScaledServings == Recipe.OriginalServings ? 0 : 0.5)" FontSize="14">
                             <Span>(reset to @Recipe.OriginalServings)</Span>
                             <TapGestureRecognizer OnTapped="OnOriginalServingsTapped" />
                         </Label>
@@ -36,14 +39,14 @@
                     </GridCell>
                 </Grid>
 
-                <Label>
+                <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)">
                     <Span Text="Cook time: " />
                     <Span Text="@Recipe.CookTime.ToCookTimeDisplay()" />
                 </Label>
 
                 <StackLayout Orientation="StackOrientation.Horizontal">
-                    <Label class="recipeDetailSection" Text="Ingredients" />
-                    <Label Text="(reset)" VerticalTextAlignment="TextAlignment.Center" Opacity="0.5" IsVisible="@(!Recipe.AllIngredientsDefault)">
+                    <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)" class="recipeDetailSection" Text="Ingredients" />
+                    <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)" Text="(reset)" VerticalTextAlignment="TextAlignment.Center" Opacity="0.5" IsVisible="@(!Recipe.AllIngredientsDefault)">
                         <TapGestureRecognizer OnTapped="OnResetIngredientsDoneTapped" />
                     </Label>
                 </StackLayout>
@@ -58,7 +61,8 @@
                             <CheckBox VerticalOptions="LayoutOptions.Center" @bind-IsChecked="ingredient.IsDone" />
                         </GridCell>
                         <GridCell Row="@i" Column="1">
-                            <Label class="recipeDetailIngredientQuantity"
+                            <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)"
+                                   class="recipeDetailIngredientQuantity"
                                    Text="@($"{FractionHelper.FormatFraction(ingredient.Quantity)} {ingredient.Unit}")"
                                    VerticalOptions="LayoutOptions.Center"
                                    Opacity="@GetDoneOpacity(ingredient.IsDone)">
@@ -66,7 +70,8 @@
                             </Label>
                         </GridCell>
                         <GridCell Row="@i" Column="2">
-                            <Label Text="@ingredient.Name"
+                            <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)"
+                                   Text="@ingredient.Name"
                                    VerticalOptions="LayoutOptions.Center"
                                    Opacity="@GetDoneOpacity(ingredient.IsDone)">
                                 <TapGestureRecognizer OnTapped="@(() => OnIngredientTapped(ingredient))" />
@@ -76,8 +81,8 @@
                 </Grid>
 
                 <StackLayout Orientation="StackOrientation.Horizontal">
-                    <Label class="recipeDetailSection" Text="Directions" />
-                    <Label Text="(reset)" VerticalTextAlignment="TextAlignment.Center" Opacity="0.5" IsVisible="@(!Recipe.AllStepsDefault)">
+                    <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)" class="recipeDetailSection" Text="Directions" />
+                    <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)" Text="(reset)" VerticalTextAlignment="TextAlignment.Center" Opacity="0.5" IsVisible="@(!Recipe.AllStepsDefault)">
                         <TapGestureRecognizer OnTapped="OnResetStepsDoneTapped" />
                     </Label>
                 </StackLayout>
@@ -86,13 +91,15 @@
                 {
                     var step = Recipe.Steps[i];
 
-                    <Label class="recipeDetailStepTitle"
+                    <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)"
+                           class="recipeDetailStepTitle"
                            Text="@($"Step {i + 1}.")"
                            Opacity="@GetDoneOpacity(step.IsDone)">
                         <TapGestureRecognizer OnTapped="@(() => OnStepTapped(step))" />
                     </Label>
 
-                    <Label class="recipeDetailStepText"
+                    <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)"
+                           class="recipeDetailStepText"
                            Text="@Recipe.Steps[i].Step"
                            Opacity="@GetDoneOpacity(step.IsDone)">
                         <TapGestureRecognizer OnTapped="@(() => OnStepTapped(step))" />

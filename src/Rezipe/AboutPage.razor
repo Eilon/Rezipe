@@ -1,17 +1,19 @@
-﻿<ContentPage Title="About">
+﻿<ContentPage Title="About"
+             BackgroundColor="GetThemeColor(lightColor: Color.White, darkColor: Color.Black)">
     <ScrollView>
         <StackLayout Orientation="StackOrientation.Vertical"
                      Padding="new Thickness(16,40,16,40)"
                      Spacing="10">
             <Image Source="@(ImageSource.FromResource("Rezipe.images.about-background-reduced.jpg"))"
                    Aspect="Aspect.AspectFit" />
-            <Label FontSize="22">
+            <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)"
+                   FontSize="22">
                 <Span FontAttributes="FontAttributes.Bold"
                       FontSize="22">Rezipe</Span>
                 <Span Text=" " />
-                <Span TextColor="lightTextColor">1.0</Span>
+                <Span>1.3</Span>
             </Label>
-            <Label>
+            <Label TextColor="GetThemeColor(lightColor: Color.Black, darkColor: Color.White)">
                 <Span>This app is written in Blazor and C# with the Xamarin Platform.</Span>
             </Label>
             <Button Margin="new Thickness(0,top: 10,0,0)"
@@ -27,7 +29,6 @@
 @code
 {
     Color primaryColor = Color.FromHex("96d1ff");
-    Color lightTextColor = Color.FromHex("999999");
 
     async Task OpenWeb()
     {
