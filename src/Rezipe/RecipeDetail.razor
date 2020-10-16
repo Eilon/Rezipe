@@ -2,7 +2,7 @@
 @inject RecipeStore Recipes
 @inject UserDataStore UserStore
 
-<ContentView>
+<ContentView BackgroundColor="GetThemeColor(lightColor: Color.White, darkColor: Color.Black)">
     <ScrollView>
         @if (Recipe == null)
         {
