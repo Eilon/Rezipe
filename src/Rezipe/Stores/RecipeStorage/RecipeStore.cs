@@ -350,6 +350,81 @@ namespace Rezipe.Stores.RecipeStorage
                     new RecipeStep { Step = "Garnish with fresh parley and serve with mashed potatoes if desired." },
                 },
             },
+
+            new Recipe
+            {
+                ID = 12,
+                Title= "Buttermilk pancakes",
+                Servings = 4,
+                CookTime = new TimeSpan(hours: 0, minutes: 45, seconds: 0),
+                Ingredients = new List<RecipeIngredient>
+                {
+                    new RecipeIngredient{ Name="All-purpose flour", Quantity=2m, Unit="cup", },
+                    new RecipeIngredient{ Name="Baking powder", Quantity=1m, Unit="tsp", },
+                    new RecipeIngredient{ Name="Baking soda", Quantity=0.5m, Unit="tsp", },
+                    new RecipeIngredient{ Name="Kosher salt", Quantity=1m, Unit="tsp", },
+                    new RecipeIngredient{ Name="Sugar", Quantity=1m, Unit="tbsp", },
+                    new RecipeIngredient{ Name="Eggs (separated)", Quantity=2m, Unit="", },
+                    new RecipeIngredient{ Name="Buttermilk", Quantity=20m, Unit="oz", },
+                    new RecipeIngredient{ Name="Butter, melted (unsalted)", Quantity=4m, Unit="tbsp", },
+                },
+                Steps = new List<RecipeStep>
+                {
+                    new RecipeStep { Step = "In large bowl whisk together flour, baking powder, baking soda, salt, and sugar." },
+                    new RecipeStep { Step = "In medium bowl whish egg whites until stiff peaks form." },
+                    new RecipeStep { Step = "In another large bowl whish egg yolks and buttermilk." },
+                    new RecipeStep { Step = "In last bowl slowly add melted butter while whisking." },
+                    new RecipeStep { Step = "In last bowl fold in the egg whites until combined." },
+                    new RecipeStep { Step = "Pour wet ingredients into dry ingredients until combined." },
+                    new RecipeStep { Step = "Heat non-stick skillet to medium, melt butter in it and spread with paper towel." },
+                    new RecipeStep { Step = "Use 1/4 cup to place 3-4 pancakes in the pan." },
+                    new RecipeStep { Step = "When bubbles form on top (about 2 minutes), flip and cook other side (another 2 minutes)." },
+                },
+            },
+
+            new Recipe
+            {
+                ID = 13,
+                Title= "Piña colada (alcoholic)",
+                Servings = 2,
+                CookTime = new TimeSpan(hours: 0, minutes: 15, seconds: 0),
+                Ingredients = new List<RecipeIngredient>
+                {
+                    new RecipeIngredient{ Name="Ice", Quantity=1.5m, Unit="cup", },
+                    new RecipeIngredient{ Name="Pineapple, diced, frozen", Quantity=0.5m, Unit="cup", },
+                    new RecipeIngredient{ Name="Pineapple juice", Quantity=2m, Unit="oz", },
+                    new RecipeIngredient{ Name="Coconut cream", Quantity=2m, Unit="oz", },
+                    new RecipeIngredient{ Name="White rum", Quantity=1.5m, Unit="oz", },
+                    new RecipeIngredient{ Name="Dark rum", Quantity=1m, Unit="oz", },
+                    new RecipeIngredient{ Name="Pineapple slices (garnish, optional)", Quantity=2m, Unit="", },
+                },
+                Steps = new List<RecipeStep>
+                {
+                    new RecipeStep { Step = "Place all ingredients (except garnish) in blender and blend until smooth." },
+                    new RecipeStep { Step = "Serve in a glass with optional garnish and a straw." },
+                },
+            },
+
+            new Recipe
+            {
+                ID = 14,
+                Title= "Hard boiled eggs",
+                Servings = 6,
+                CookTime = new TimeSpan(hours: 0, minutes: 15, seconds: 0),
+                Ingredients = new List<RecipeIngredient>
+                {
+                    new RecipeIngredient{ Name="Eggs", Quantity=6m, Unit="", },
+                },
+                Steps = new List<RecipeStep>
+                {
+                    new RecipeStep { Step = "Place eggs in a pot and cover with cold water by about 1 inch" },
+                    new RecipeStep { Step = "Boil over medium-high heat" },
+                    new RecipeStep { Step = "Cover, then remove from heat and let cool for 10 minutes." },
+                    new RecipeStep { Step = "Cool eggs in ice water, if needed" },
+                    new RecipeStep { Step = "To peel eggs, crack on a hard surface, then insert a spoon into cracked opening to remove large pieces of shell." },
+                },
+            },
+
         };
 
         public List<Recipe> GetRecipes()
