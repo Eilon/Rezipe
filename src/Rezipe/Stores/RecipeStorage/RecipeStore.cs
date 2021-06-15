@@ -425,6 +425,111 @@ namespace Rezipe.Stores.RecipeStorage
                 },
             },
 
+            new Recipe
+            {
+                ID = 15,
+                Title= "Pulled pork (slow cooker)",
+                Servings = 8,
+                CookTime = new TimeSpan(hours: 8, minutes: 0, seconds: 0),
+                Ingredients = new List<RecipeIngredient>
+                {
+                    new RecipeIngredient{ Name="Boneless pork shoulder", Quantity=4.5m, Unit="lbs", },
+                    new RecipeIngredient{ Name="Onions, diced", Quantity=1m, Unit="", },
+                    new RecipeIngredient{ Name="Ketchup", Quantity=1m, Unit="cup", },
+                    new RecipeIngredient{ Name="Dark brown sugar", Quantity=0.25m, Unit="cup", },
+                    new RecipeIngredient{ Name="Cider vinegar", Quantity=3m, Unit="tbsp", },
+                    new RecipeIngredient{ Name="Molasses", Quantity=2m, Unit="tbsp", },
+                    new RecipeIngredient{ Name="Dijon mustard", Quantity=1m, Unit="tbsp", },
+                    new RecipeIngredient{ Name="Sambal or other Asian chile sauce (optional)", Quantity=2m, Unit="tsp", },
+                },
+                Steps = new List<RecipeStep>
+                {
+                    new RecipeStep { Step = "In a medium bowl mix the diced onion with the ketchup, brown sugar, cider vinegar, molasses, mustard, and chile sauce." },
+                    new RecipeStep { Step = "In slow cooker place pork on the bottom and cover evenly with the mixture from the bowl." },
+                    new RecipeStep { Step = "Cook on high until the pork is very tender, about 6 hours." },
+                    new RecipeStep { Step = "Remove the solid pieces of pork to a large rimmed baking sheet and using two forks shred the meat." },
+                    new RecipeStep { Step = "Pour the remaining liquid from the slow cooker to a large sauce pan and bring to a boil." },
+                    new RecipeStep { Step = "Continue cooking over high heat until thickened, about 15 minutes." },
+                    new RecipeStep { Step = "Mix the shredded pork into the sauce pan." },
+                    new RecipeStep { Step = "Add salt and pepper to season (optional)." },
+                },
+            },
+
+            new Recipe
+            {
+                ID = 16,
+                Title= "Chicken and asparagus in penne pasta",
+                Servings = 4,
+                CookTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
+                Ingredients = new List<RecipeIngredient>
+                {
+                    new RecipeIngredient{ Name="Penne pasta", Quantity=1.5m, Unit="cups", },
+                    new RecipeIngredient{ Name="Asparagus, cut into 1-inch pieces", Quantity=1m, Unit="cup", },
+                    new RecipeIngredient{ Name="Boneless skinless chiccken breast, cut into 1-inch cubes", Quantity=6m, Unit="oz", },
+                    new RecipeIngredient{ Name="Garlic cloves, minced", Quantity=2m, Unit="", },
+                    new RecipeIngredient{ Name="Can of diced tomatoes", Quantity=14.5m, Unit="oz", },
+                    new RecipeIngredient{ Name="Dried basil or oregano", Quantity=2m, Unit="tsp", },
+                    new RecipeIngredient{ Name="Soft goat cheese", Quantity=1m, Unit="tbsp", },
+                    new RecipeIngredient{ Name="Parmesan cheese", Quantity=1m, Unit="tbsp", },
+                },
+                Steps = new List<RecipeStep>
+                {
+                    new RecipeStep { Step = "Cook pasta until al dente, drain, set aside (about 10 minutes)." },
+                    new RecipeStep { Step = "Steam asparagus until tender (about 3 minutes)." },
+                    new RecipeStep { Step = "Heat large nonstick frying pan to medium-high heat and spray cooking spray." },
+                    new RecipeStep { Step = "Add chicken and garlic and cook until chicken is golden brown (about 6 minutes)." },
+                    new RecipeStep { Step = "Add tomatoes, including the juice, and add the basil or oregano." },
+                    new RecipeStep { Step = "Simmer 2 minutes." },
+                    new RecipeStep { Step = "In a large bowl combine pasta, asparagus, chicken mixture, and goat cheese, and toss to mix." },
+                    new RecipeStep { Step = "Serve to plates and sprinkle with Parmesan cheese." },
+                },
+            },
+
+            new Recipe
+            {
+                ID = 17,
+                Title= "Apple cinnamon muffins",
+                Servings = 16,
+                CookTime = new TimeSpan(hours: 1, minutes: 0, seconds: 0),
+                Ingredients = new List<RecipeIngredient>
+                {
+                    new RecipeIngredient{ Name="All-purpose flour", Quantity=2m, Unit="cups", },
+                    new RecipeIngredient{ Name="All-purpose flour for coating apples", Quantity=2m, Unit="tsp", },
+                    new RecipeIngredient{ Name="Baking powder", Quantity=1.5m, Unit="tsp", },
+                    new RecipeIngredient{ Name="Salt", Quantity=1, Unit="tsp", },
+                    new RecipeIngredient{ Name="Ground cinnamon", Quantity=2m, Unit="tsp", },
+                    new RecipeIngredient{ Name="Ground cinnamon for coating apples", Quantity=0.5m, Unit="tsp", },
+                    new RecipeIngredient{ Name="Diced apples", Quantity=2m, Unit="cups", },
+                    new RecipeIngredient{ Name="Unsalted butter, room temperature", Quantity=0.5m, Unit="cup", },
+                    new RecipeIngredient{ Name="Sugar", Quantity=1m, Unit="cup", },
+                    new RecipeIngredient{ Name="Eggs", Quantity=2m, Unit="", },
+                    new RecipeIngredient{ Name="Vanilla extract", Quantity=2m, Unit="tsp", },
+                    new RecipeIngredient{ Name="Milk", Quantity=0.5m, Unit="cups", },
+                    new RecipeIngredient{ Name="Unsalted butter, melted (for topping)", Quantity=0.5m, Unit="cup", },
+                    new RecipeIngredient{ Name="Sugar (for topping)", Quantity=0.25m, Unit="cup", },
+                    new RecipeIngredient{ Name="Ground cinnamon (for topping)", Quantity=0.25m, Unit="cup", },
+                },
+                Steps = new List<RecipeStep>
+                {
+                    new RecipeStep { Step = "Preheat oven to 375°F." },
+                    new RecipeStep { Step = "Spray muffin tins with bakers spray or coat well with shortening or butter and flour, making sure to discard any excess flour from the tins after coating." },
+                    new RecipeStep { Step = "Sift together 2 cups flour, baking powder, salt, and 2 teaspoons cinnamon in a medium bowl. Set aside." },
+                    new RecipeStep { Step = "Mix 2 teaspoons flour with 1/2 teaspoon cinnamon. Toss diced apples with the flour/cinnamon mixture to coat apples in a separate bowl. Set aside." },
+                    new RecipeStep { Step = "Cream together butter and sugar until lightened in color, about 3 minutes." },
+                    new RecipeStep { Step = "Add an egg, one at a time, taking care to fully incorporate before adding the other." },
+                    new RecipeStep { Step = "Mix in vanilla." },
+                    new RecipeStep { Step = "Gently fold in flour mixture, alternating with milk. Stir until just combined." },
+                    new RecipeStep { Step = "Fold in diced apples and scoop mixture into prepared muffin tins, filling about 2/3 to 3/4 full." },
+                    new RecipeStep { Step = "Bake until a toothpick or skewer inserted in the middle comes out clean, about 30 minutes." },
+                    new RecipeStep { Step = "Prepare topping for muffins while the muffins are baking by melting the butter and allowing to cool slightly." },
+                    new RecipeStep { Step = "Pour butter into a separate bowl sized easy for dipping tops of muffins." },
+                    new RecipeStep { Step = "Mix together granulated sugar and cinnamon in a separate bowl and set aside." },
+                    new RecipeStep { Step = "Once muffins have baked, remove from the oven and allow to cool slightly in the muffin tin." },
+                    new RecipeStep { Step = "Then, remove each muffin and brush the butter on with a pastry brush (or dip into the melted butter) and then into the cinnamon sugar mixture." },
+                    new RecipeStep { Step = "Place onto a plate to finish cooling." },
+                },
+            },
+
         };
 
         public List<Recipe> GetRecipes()
